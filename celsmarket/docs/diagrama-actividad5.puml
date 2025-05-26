@@ -1,0 +1,14 @@
+@startuml
+
+' Diagrama de actividad para BUC05 – Registrar venta del dispositivo
+|Nazareno|
+start
+:Accede y elige "Registrar venta";
+:Selecciona dispositivo vendido;
+:Ingresa datos del cliente;
+:Ingresa datos restantes;
+|Sistema|
+:Actualizar inventario;
+:Generar comprobante de venta;
+
+@enduml

@@ -1,0 +1,20 @@
+@startuml
+
+' Diagrama de actividad para BUC03 – Publicar dispositivo en venta
+|Nazareno|
+start
+:Accede al inventario;
+:Selecciona "Registrar nuevo celular";
+:Ingresa los datos correspondientes al celular;
+|Sistema|
+:Validar información;
+if (Datos válidos?) then (Sí)
+  :Generar publicación activa;
+  stop
+else (No)
+  :Informar error;
+  :Permitir corrección;
+  stop
+endif
+
+@enduml

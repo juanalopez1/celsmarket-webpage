@@ -1,0 +1,78 @@
+@startuml
+' Define los paquetes principales
+package "celsmarket.backend" {
+    
+    package controllers {
+        class BrandController
+        class CellphoneController
+        class SaleController
+        class UserController
+    }
+
+    package entities {
+        class Brand
+        class Cart
+        class Cellphone
+        class City
+        class Color
+        class Condition
+        class Currency
+        class Model
+        class Role
+        class Sale
+        class Storage
+        class User
+    }
+
+    package repositories {
+        class BrandRepository
+        class CartRepository
+        class CellphoneRepository
+        class CityRepository
+        class ColorRepository
+        class ConditionRepository
+        class CurrencyRepository
+        class ModelRepository
+        class RoleRepository
+        class SaleRepository
+        class StorageRepository
+        class UserRepository
+    }
+
+    package services {
+        class BrandService
+        class CartService
+        class CellphoneService
+        class SaleService
+        class UserService
+        class IBrandService
+        class ICartService
+        class ICellphoneService
+        class ISaleService
+        class IUserService
+    }
+
+    package security {
+        package filters {
+            class JwtAuthenticationFilter
+            class JwtValidationFilter
+        }
+        class SecurityConfig
+        class SimpleGrantedAuthorityJsonCreator
+        class TokenJwtConfig
+    }
+    class BackendApplication
+}
+
+controllers --> services
+controllers --> entities
+services --> repositories
+services --> entities
+repositories --> entities
+BackendApplication --> controllers
+BackendApplication --> services
+BackendApplication --> repositories
+BackendApplication --> entities
+BackendApplication --> SecurityConfig
+
+@enduml

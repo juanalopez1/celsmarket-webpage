@@ -1,0 +1,26 @@
+@startuml
+
+' Diagrama de actividad para BUC04 – Gestionar comunicación con cliente
+|Cliente|
+start
+:Visualiza publicación;
+:Envía consulta (WhatsApp);
+|Nazareno|
+:Recibe consulta;
+:Responde información solicitada;
+:Cliente manifiesta intención de compra o coordina visita;
+
+' Alternativa
+note right: A4.1: Cliente no responde
+if (Cliente no responde?) then (Sí)
+  :Marcar como "sin seguimiento";
+endif
+
+' Excepción
+note right: E4.1: Canal de contacto falla
+if (Falla canal?) then (Sí)
+  :Sugerir medio alternativo;
+endif
+stop
+
+@enduml

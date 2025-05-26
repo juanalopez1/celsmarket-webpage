@@ -1,0 +1,24 @@
+@startuml
+
+' Diagrama de actividad para BUC02 – Registrar reparación de dispositivo
+|Nazareno|
+start
+:Accede al sistema;
+:Selecciona dispositivo a actualizar;
+:Ingresa detalles de problema y reparación;
+|Sistema|
+if (Dispositivo listo para vender?) then (Sí)
+  :Actualizar estado a "Mostrar al publico";
+else (No)
+endif
+
+' Excepción
+note right: E2.1: Error al guardar
+if (Error al guardar?) then (Sí)
+  :Mostrar mensaje de error;
+  :Sugerir intento nuevamente;
+  stop
+endif
+stop
+
+@enduml

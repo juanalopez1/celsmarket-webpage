@@ -1,0 +1,29 @@
+@startuml
+
+' Diagrama de actividad para BUC01 – Registrar compra de dispositivo
+|Nazareno|
+start
+:Accede al sistema;
+:Selecciona "Registrar nuevo celular";
+:Ingresa datos del dispositivo que adquirió.;
+|Sistema|
+:Validar datos;
+if (Datos válidos?) then (Sí)
+  :Guardar registro;
+  :Actualizar inventario;
+  stop
+else (No)
+  :Mostrar error;
+  :Solicitar corrección;
+  stop
+endif
+
+' Excepción
+note right: E1.1: Error interno al registrar
+if (Error interno?) then (Sí)
+  :Notificar a Nazareno;
+  :Solicitar reintento más tarde;
+  stop
+endif
+
+@enduml
