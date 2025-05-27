@@ -22,6 +22,7 @@ import org.springframework.web.cors.UrlBasedCorsConfigurationSource;
 import org.springframework.web.filter.CorsFilter;
 
 import celsmarket.backend.security.filter.JwtAuthenticationFilter;
+import celsmarket.backend.security.filter.JwtValidationFilter;
 
 @Configuration
 @EnableMethodSecurity(prePostEnabled = true) // activa las anotaciones de los permisos de las rutas
@@ -48,10 +49,12 @@ public class SecurityConfig {
                 // .requestMatchers(HttpMethod.POST, "/home/create").hasRole("admin")
                 // .requestMatchers(HttpMethod.PUT, "/home/{id}").hasRole("admin")
                 // .requestMatchers(HttpMethod.DELETE, "/home/{id}").hasRole("admin")
-                .requestMatchers("/protected/**").permitAll()
-                        .requestMatchers("/brands/**").permitAll()
-                        .requestMatchers("/ventas/**").permitAll()
+                .requestMatchers("/protected/**").hasRole("admin")
+                .requestMatchers("/brands/**").permitAll()
+                .requestMatchers("/ventas/**").permitAll()
                 .anyRequest().authenticated())
+                .addFilter(new JwtValidationFilter(authConfig.getAuthenticationManager())) // todo el filtro y
+
                 .addFilter(new JwtAuthenticationFilter(authConfig.getAuthenticationManager())) // todo el filtro y
                                                                                                // validacion del jwt
                 .csrf(config -> config.disable())

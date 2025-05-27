@@ -8,9 +8,14 @@ import org.springframework.stereotype.Repository;
 
 import celsmarket.backend.entities.User;
 
+
 @Repository
 public interface UserRepository extends CrudRepository<User, Integer> {
 
     @Query("select u from User u where u.role=?1")
     Optional<User> findByRole(String role);
+
+    
+    @Query("select u from User u where u.email=?1")
+    Optional<User> findByEmail(String email);
 }
