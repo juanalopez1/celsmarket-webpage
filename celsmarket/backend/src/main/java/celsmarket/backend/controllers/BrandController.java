@@ -13,13 +13,12 @@ import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import celsmarket.backend.entities.Brand;
-import celsmarket.backend.services.IBrandService;
+import celsmarket.backend.repositories.BrandRepository;
 import jakarta.validation.Valid;
 
 @RestController
@@ -27,7 +26,7 @@ import jakarta.validation.Valid;
 public class BrandController {
 
     @Autowired
-    private IBrandService brandService;
+    private BrandRepository brandRepository;
 
     private ResponseEntity<?> validation(BindingResult result) {
         Map<String, String> errors = new HashMap<>();
@@ -43,31 +42,17 @@ public class BrandController {
         if (result.hasFieldErrors()) {
             return validation(result);
         }
-        return ResponseEntity.status(HttpStatus.CREATED).body(brandService.save(brand));
-    }
-
-    @PutMapping("/{id}") // poner el binding a la derecha de lo que vamos a validar
-    public ResponseEntity<?> update(@Valid @RequestBody Brand brand, BindingResult result,
-            @PathVariable Integer id) {
-        if (result.hasFieldErrors()) {
-            return validation(result);
-        }
-        Optional<Brand> brandOptional = brandService.update(id, brand);
-        if (brandOptional.isPresent()) {
-            return ResponseEntity.status(HttpStatus.OK).body(brandOptional.orElseThrow());
-        }
-        return ResponseEntity.notFound().build();
-
+        return ResponseEntity.status(HttpStatus.CREATED).body(brandRepository.save(brand));
     }
 
     @GetMapping
     public List<Brand> listAll() {
-        return (List<Brand>) brandService.findAll();
+        return (List<Brand>) brandRepository.findAll();
     }
 
     @GetMapping("/{id}")
     public ResponseEntity<?> view(@PathVariable Integer id) {
-        Optional<Brand> brandOptional = brandService.findOne(id);
+        Optional<Brand> brandOptional = brandRepository.findById(id);
         if (brandOptional.isPresent()) {
             return ResponseEntity.ok(brandOptional.get());
         }
@@ -76,9 +61,9 @@ public class BrandController {
 
     @DeleteMapping("/{id}")
     public ResponseEntity<?> delete(@PathVariable Integer id) {
-        Optional<Brand> brandOptional = brandService.findOne(id);
+        Optional<Brand> brandOptional = brandRepository.findById(id);
         if (brandOptional.isPresent()) {
-            brandService.delete(brandOptional.get().getId());
+            brandRepository.delete(brandOptional.get());
             return ResponseEntity.ok().build();
         }
         return ResponseEntity.notFound().build();
