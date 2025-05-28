@@ -1,8 +1,6 @@
 package celsmarket.backend.controllers;
 
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -21,6 +19,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import celsmarket.backend.entities.User;
 import celsmarket.backend.services.IUserService;
+import celsmarket.backend.services.ValidationService;
 import jakarta.validation.Valid;
 
 //@CrossOrigin(origins = "http://localhost:4200")
@@ -31,14 +30,8 @@ public class UserController {
     @Autowired
     private IUserService userService;
 
-    private ResponseEntity<?> validation(BindingResult result) {
-        Map<String, String> errors = new HashMap<>();
-        result.getFieldErrors().forEach(e -> {
-            errors.put(e.getField(), "El campo " + e.getField() + " " + e.getDefaultMessage());
-        });
-        return ResponseEntity.badRequest().body(errors);
-
-    }
+    @Autowired
+    private ValidationService validator;
 
     @GetMapping
     public List<User> listAll() {
@@ -57,7 +50,7 @@ public class UserController {
     @PostMapping("/register")
     public ResponseEntity<?> create(@Valid @RequestBody User user, BindingResult result) {
         if (result.hasFieldErrors()) {
-            return validation(result);
+            return validator.validate(result);
         }
         userService.save(user);
         return ResponseEntity.status(HttpStatus.CREATED).body(userService.save(user));
@@ -77,7 +70,7 @@ public class UserController {
     public ResponseEntity<?> update(@Valid @RequestBody User user, BindingResult result,
             @PathVariable Integer id) {
         if (result.hasFieldErrors()) {
-            return validation(result);
+            return validator.validate(result);
         }
         Optional<User> userOptional = userService.update(id, user);
         if (userOptional.isPresent()) {

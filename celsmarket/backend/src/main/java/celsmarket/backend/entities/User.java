@@ -42,6 +42,12 @@ public class User {
     @Column(length = 20, nullable = false)
     private String role;
 
+    @Override
+    public String toString() {
+        return "User [id=" + id + ", name=" + name + ", password=" + password + ", email=" + email + ", shoppingCart="
+                + shoppingCart + ", role=" + role + "]";
+    }
+
     public Integer getId() {
         return id;
     }

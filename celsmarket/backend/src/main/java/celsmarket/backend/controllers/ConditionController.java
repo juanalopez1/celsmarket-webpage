@@ -17,17 +17,24 @@ import org.springframework.web.bind.annotation.RestController;
 
 import celsmarket.backend.entities.Condition;
 import celsmarket.backend.repositories.ConditionRepository;
+import celsmarket.backend.services.ValidationService;
 import jakarta.validation.Valid;
 
 @RestController
 @RequestMapping("/conditions")
 public class ConditionController {
-    
+
     @Autowired
     private ConditionRepository conditionRepository;
 
+    @Autowired
+    private ValidationService validator;
+
     @PostMapping
     public ResponseEntity<?> create(@Valid @RequestBody Condition condition, BindingResult result) {
+        if (result.hasFieldErrors()) {
+            return validator.validate(result);
+        }
         return ResponseEntity.status(HttpStatus.CREATED).body(conditionRepository.save(condition));
     }
 

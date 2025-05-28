@@ -1,8 +1,6 @@
 package celsmarket.backend.controllers;
 
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -22,6 +20,7 @@ import celsmarket.backend.entities.Cellphone;
 import celsmarket.backend.entities.Sale;
 import celsmarket.backend.services.CellphoneService;
 import celsmarket.backend.services.SaleService;
+import celsmarket.backend.services.ValidationService;
 import jakarta.validation.Valid;
 
 @RestController
@@ -34,19 +33,13 @@ public class SaleController {
     @Autowired 
     private CellphoneService cellphoneService;
 
-    private ResponseEntity<?> validation(BindingResult result) {
-        Map<String, String> errors = new HashMap<>();
-        result.getFieldErrors().forEach(e -> {
-            errors.put(e.getField(), "El campo " + e.getField() + " " + e.getDefaultMessage());
-        });
-        return ResponseEntity.badRequest().body(errors);
-
-    }
+    @Autowired
+    private ValidationService validator;
 
     @PostMapping
     public ResponseEntity<?> create(@Valid @RequestBody Sale sale, BindingResult result) {
         if (result.hasFieldErrors()) {
-            return validation(result);
+            return validator.validate(result);
         }
         Optional<Cellphone> cellphoneSold = cellphoneService.findOne(sale.getCellphone().getId());
         if(cellphoneSold.isPresent() && cellphoneSold.get().getStock() >= 1 && cellphoneSold.get().isShown()){
@@ -61,7 +54,7 @@ public class SaleController {
     public ResponseEntity<?> update(@Valid @RequestBody Sale sale, BindingResult result,
             @PathVariable Integer id) {
         if (result.hasFieldErrors()) {
-            return validation(result);
+            return validator.validate(result);
         }
         Optional<Sale> saleOptional = saleService.update(id, sale);
         if (saleOptional.isPresent()) {

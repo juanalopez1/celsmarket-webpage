@@ -32,7 +32,6 @@ public class JpaUserDetailsService implements UserDetailsService {
         User user = opUser.orElseThrow();
 
         List<GrantedAuthority> authorities = List.of(new SimpleGrantedAuthority("ROLE_" + user.getRole()));
-
         return new org.springframework.security.core.userdetails.User(user.getEmail(), user.getPassword(), true, true,
                 true, true, authorities);
 

@@ -1,8 +1,6 @@
 package celsmarket.backend.controllers;
 
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -19,6 +17,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import celsmarket.backend.entities.Brand;
 import celsmarket.backend.repositories.BrandRepository;
+import celsmarket.backend.services.ValidationService;
 import jakarta.validation.Valid;
 
 @RestController
@@ -28,19 +27,13 @@ public class BrandController {
     @Autowired
     private BrandRepository brandRepository;
 
-    private ResponseEntity<?> validation(BindingResult result) {
-        Map<String, String> errors = new HashMap<>();
-        result.getFieldErrors().forEach(e -> {
-            errors.put(e.getField(), "El campo " + e.getField() + " " + e.getDefaultMessage());
-        });
-        return ResponseEntity.badRequest().body(errors);
-
-    }
+    @Autowired
+    private ValidationService validator;
 
     @PostMapping
     public ResponseEntity<?> create(@Valid @RequestBody Brand brand, BindingResult result) {
         if (result.hasFieldErrors()) {
-            return validation(result);
+            return validator.validate(result);
         }
         return ResponseEntity.status(HttpStatus.CREATED).body(brandRepository.save(brand));
     }

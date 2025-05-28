@@ -14,6 +14,7 @@ import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 
 import celsmarket.backend.entities.User;
+
 import com.fasterxml.jackson.core.exc.StreamReadException;
 import com.fasterxml.jackson.databind.DatabindException;
 import com.fasterxml.jackson.databind.ObjectMapper;
@@ -66,7 +67,6 @@ public class JwtAuthenticationFilter extends UsernamePasswordAuthenticationFilte
 
         String username = user.getUsername();
         Collection<? extends GrantedAuthority> roles = authResult.getAuthorities();
-
         // los claims son parte del payload, el subject tambien por ej, es un claim tb
         Claims claims = Jwts.claims().add("authorities", new ObjectMapper().writeValueAsString(roles))
                 .add("username", username)
@@ -92,7 +92,7 @@ public class JwtAuthenticationFilter extends UsernamePasswordAuthenticationFilte
             AuthenticationException failed) throws IOException, ServletException {
         Map<String, String> body = new HashMap<>();
         body.put(SPRING_SECURITY_FORM_PASSWORD_KEY, CONTENT_TYPE);
-        body.put("message", "Error en la autenticación, username o contraseña incorrectos");
+        body.put("message", "Error en la autenticación, email o contraseña incorrectos");
         body.put("error", failed.getMessage());
 
         response.getWriter().write(new ObjectMapper().writeValueAsString(body));
