@@ -2,6 +2,7 @@ package celsmarket.backend.services;
 
 import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.GrantedAuthority;
@@ -25,13 +26,21 @@ public class JpaUserDetailsService implements UserDetailsService {
     @Override
     public UserDetails loadUserByUsername(String email) throws UsernameNotFoundException {
         Optional<User> opUser = userRepository.findByEmail(email);
+        System.out.println(opUser.get().toString() + "AAAAAAAAAAAAAAAAAAAAAAAA");
         if (opUser.isEmpty()) {
             throw new UsernameNotFoundException(String.format("Email %s no encontrado en el sistema.", email));
         }
 
         User user = opUser.orElseThrow();
+        System.out.println("EN DETAILS " + user.toString());
 
+        // GrantedAuthority authorities = new SimpleGrantedAuthority("ROLE_" +
+        // user.getRole());
         List<GrantedAuthority> authorities = List.of(new SimpleGrantedAuthority("ROLE_" + user.getRole()));
+
+        System.out.println("EN DETAILS 2  " + new org.springframework.security.core.userdetails.User(user.getEmail(),
+                user.getPassword(), true, true,
+                true, true, authorities));
         return new org.springframework.security.core.userdetails.User(user.getEmail(), user.getPassword(), true, true,
                 true, true, authorities);
 

@@ -52,7 +52,6 @@ public class UserController {
         if (result.hasFieldErrors()) {
             return validator.validate(result);
         }
-        userService.save(user);
         return ResponseEntity.status(HttpStatus.CREATED).body(userService.save(user));
     }
 

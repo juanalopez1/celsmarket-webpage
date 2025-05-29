@@ -23,7 +23,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 
 @RestController
-@RequestMapping("/protected")
+@RequestMapping("/inventory")
 public class CellphoneController {
 
     @Autowired
@@ -59,7 +59,7 @@ public class CellphoneController {
         return (List<Cellphone>) cellphoneService.findAll();
     }
 
-    @GetMapping("/show")
+    @GetMapping("/availables")
     public List<Cellphone> listShown() {
         return (List<Cellphone>) cellphoneService.findAllShownCellphones();
     }

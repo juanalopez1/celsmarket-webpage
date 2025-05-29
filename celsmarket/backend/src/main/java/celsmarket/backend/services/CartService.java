@@ -25,7 +25,7 @@ public class CartService implements ICartService {
 
     @Override
     public Cart findCart(User user) {
-        return cartRepository.findUsersCart(user);
+        return cartRepository.findByUserCart(user);
     }
 
     @Override

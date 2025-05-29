@@ -9,7 +9,10 @@ import celsmarket.backend.entities.User;
 
 @Repository
 public interface CartRepository extends CrudRepository<Cart, Integer> {
-    
+
+    @Query("SELECT c FROM Cart c JOIN FETCH c.cellphones WHERE c.user = ?1")
+    Cart findUsersCartWithCellphones(User user);
+
     @Query("select c from Cart c where c.user=?1")
-    Cart findUsersCart(User user);
+    Cart findByUserCart(User user);
 }

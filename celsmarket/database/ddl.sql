@@ -62,7 +62,7 @@ create table users(
 
 create table carts(
     id serial primary key,
-    id_client int not null references users(id)
+    id_client int not null unique references users(id)
 );
 
 create table cart_cellphones(
@@ -117,6 +117,20 @@ create trigger trg_make_sale
 after insert on sales
 for each row
 execute function make_sale();
+
+create or replace function create_cart()
+returns trigger as $$
+begin
+    insert into carts(id_client)
+    values (NEW.id);
+    return new;
+end;
+$$ language plpgsql;
+
+create trigger trg_create_cart
+after insert on users
+for each row
+execute function create_cart();
 
 create table users_audit(
     id serial primary key,

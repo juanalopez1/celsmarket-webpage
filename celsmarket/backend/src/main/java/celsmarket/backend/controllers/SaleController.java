@@ -24,7 +24,7 @@ import celsmarket.backend.services.ValidationService;
 import jakarta.validation.Valid;
 
 @RestController
-@RequestMapping("/ventas")
+@RequestMapping("/sales")
 public class SaleController {
     
     @Autowired

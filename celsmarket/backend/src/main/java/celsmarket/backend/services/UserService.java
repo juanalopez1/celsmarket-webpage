@@ -28,7 +28,7 @@ public class UserService implements IUserService {
 
     @Override
     public User save(User user) {
-        if (user.getRole() != "client") {
+        if (!"client".equals(user.getRole())) {
             user.setRole("client");
         }
         user.setPassword(passwordEncoder.encode(user.getPassword()));
@@ -57,5 +57,5 @@ public class UserService implements IUserService {
     public Optional<User> findOne(Integer id) {
         return userRepository.findById(id);
     }
-    
+
 }

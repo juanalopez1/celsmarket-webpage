@@ -2,13 +2,11 @@ package celsmarket.backend.entities;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 
-import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
-import jakarta.persistence.OneToOne;
 import jakarta.persistence.Table;
 import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotBlank;
@@ -35,17 +33,14 @@ public class User {
     @Column(unique = true)
     private String email;
 
-    @OneToOne(mappedBy = "user", cascade = CascadeType.ALL, orphanRemoval = true)
-    private Cart shoppingCart;
-
     @Pattern(regexp = "^(admin|client)$", message = "El rol debe ser 'admin' o 'client'")
-    @Column(length = 20, nullable = false)
+    @Column(nullable = false)
     private String role;
 
     @Override
     public String toString() {
-        return "User [id=" + id + ", name=" + name + ", password=" + password + ", email=" + email + ", shoppingCart="
-                + shoppingCart + ", role=" + role + "]";
+        return "User [id=" + id + ", name=" + name + ", password=" + password + ", email=" + email + ", role=" + role
+                + "]";
     }
 
     public Integer getId() {
@@ -80,14 +75,6 @@ public class User {
         this.email = email;
     }
 
-    public Cart getShoppingCart() {
-        return shoppingCart;
-    }
-
-    public void setShoppingCart(Cart shoppingCart) {
-        this.shoppingCart = shoppingCart;
-    }
-
     public String getRole() {
         return role;
     }
@@ -95,7 +82,5 @@ public class User {
     public void setRole(String role) {
         this.role = role;
     }
-
-    
 
 }

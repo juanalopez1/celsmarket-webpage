@@ -32,26 +32,36 @@ public class SecurityConfig {
     private AuthenticationConfiguration authConfig;
 
     @Bean
-    AuthenticationManager authManager() throws Exception {
+    AuthenticationManager authenticationManager() throws Exception {
         return authConfig.getAuthenticationManager();
     }
 
     @Bean
-    PasswordEncoder encoder() {
+    PasswordEncoder passwordEncoder() {
         return new BCryptPasswordEncoder();
     }
 
     @Bean
     public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
         return http.authorizeHttpRequests(authz -> authz
-                .requestMatchers(HttpMethod.GET, "/users").permitAll()
                 .requestMatchers(HttpMethod.POST, "/users/register").permitAll()
-                // .requestMatchers(HttpMethod.POST, "/home/create").hasRole("admin")
-                // .requestMatchers(HttpMethod.PUT, "/home/{id}").hasRole("admin")
-                // .requestMatchers(HttpMethod.DELETE, "/home/{id}").hasRole("admin")
-                .requestMatchers("/protected/**").hasRole("admin")
-                .requestMatchers("/brands/**").permitAll()
-                .requestMatchers("/ventas/**").permitAll()
+                .requestMatchers(HttpMethod.GET, "/inventory/availables").permitAll()
+                .requestMatchers(HttpMethod.POST, "/inventory").hasRole("admin")
+                .requestMatchers(HttpMethod.DELETE, "/inventory").hasRole("admin")
+                .requestMatchers(HttpMethod.PUT, "/inventory").hasRole("admin")
+                .requestMatchers(HttpMethod.GET, "/inventory").hasRole("admin")
+                .requestMatchers(HttpMethod.GET, "/users").hasRole("admin")
+                .requestMatchers("/brands/**").hasRole("admin")
+                .requestMatchers("/sales/**").hasRole("admin")
+                .requestMatchers("/cities/**").hasRole("admin")
+                .requestMatchers("/colors/**").hasRole("admin")
+                .requestMatchers("/conditions/**").hasRole("admin")
+                .requestMatchers("/currencies/**").hasRole("admin")
+                .requestMatchers("/models/**").hasRole("admin")
+                .requestMatchers("/storages/**").hasRole("admin")
+                .requestMatchers("/sales/{id}").authenticated()
+                .requestMatchers("/users/{id}").authenticated()
+                .requestMatchers("/carts/**").permitAll()
                 .anyRequest().authenticated())
                 .addFilter(new JwtValidationFilter(authConfig.getAuthenticationManager())) // todo el filtro y
 

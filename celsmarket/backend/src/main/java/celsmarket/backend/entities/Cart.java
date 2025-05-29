@@ -1,7 +1,9 @@
 package celsmarket.backend.entities;
 
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -23,7 +25,7 @@ public class Cart {
 
     @ManyToMany
     @JoinTable(name = "cart_cellphones", joinColumns = @JoinColumn(name = "id_cart"), inverseJoinColumns = @JoinColumn(name = "id_cellphone"))
-    private List<Cellphone> cellphones = new ArrayList<>();
+    private Set<Cellphone> cellphones = new HashSet<>();
 
     @OneToOne
     @JoinColumn(name = "id_client", unique = true)
@@ -37,20 +39,13 @@ public class Cart {
         this.id = id;
     }
 
-    public List<Cellphone> getCellphones() {
+    public Set<Cellphone> getCellphones() {
         return cellphones;
     }
 
-    public void setCellphones(List<Cellphone> cellphones) {
+    public void setCellphones(Set<Cellphone> cellphones) {
         this.cellphones = cellphones;
     }
 
-    public User getUser() {
-        return user;
-    }
-
-    public void setUser(User user) {
-        this.user = user;
-    }
 
 }
