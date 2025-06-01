@@ -18,7 +18,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import celsmarket.backend.entities.Cellphone;
 import celsmarket.backend.entities.Sale;
-import celsmarket.backend.services.CellphoneService;
+import celsmarket.backend.repositories.CellphoneRepository;
 import celsmarket.backend.services.SaleService;
 import celsmarket.backend.services.ValidationService;
 import jakarta.validation.Valid;
@@ -26,12 +26,12 @@ import jakarta.validation.Valid;
 @RestController
 @RequestMapping("/sales")
 public class SaleController {
-    
+
     @Autowired
     private SaleService saleService;
 
-    @Autowired 
-    private CellphoneService cellphoneService;
+    @Autowired
+    private CellphoneRepository cellphoneRepository;
 
     @Autowired
     private ValidationService validator;
@@ -41,11 +41,15 @@ public class SaleController {
         if (result.hasFieldErrors()) {
             return validator.validate(result);
         }
-        Optional<Cellphone> cellphoneSold = cellphoneService.findOne(sale.getCellphone().getId());
-        if(cellphoneSold.isPresent() && cellphoneSold.get().getStock() >= 1 && cellphoneSold.get().isShown()){
-            cellphoneSold.get().setShown(false);
-            cellphoneSold.get().setStock(cellphoneSold.get().getStock() - 1);
-            return ResponseEntity.status(HttpStatus.CREATED).body(saleService.save(sale));
+        Optional<Cellphone> cellphoneSold = cellphoneRepository.findById(sale.getCellphone().getId());
+        if (cellphoneSold.isPresent()) {
+            Cellphone phone = cellphoneSold.get();
+            if (phone.getStock() >= 1 && phone.isShown() && !phone.isSold()) {
+                phone.setShown(false);
+                phone.setSold(true);
+                phone.setStock(phone.getStock() - 1);
+                return ResponseEntity.status(HttpStatus.CREATED).body(saleService.save(sale));
+            }
         }
         return ResponseEntity.badRequest().build();
     }

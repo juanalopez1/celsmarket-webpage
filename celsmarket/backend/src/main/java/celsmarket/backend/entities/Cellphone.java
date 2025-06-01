@@ -48,6 +48,23 @@ public class Cellphone {
     private Color color;
 
     private boolean shown;
+    private boolean sold;
+
+    @Override
+    public String toString() {
+        return "Cellphone [id=" + id + ", stock=" + stock + ", price=" + price + ", batteryCondition="
+                + batteryCondition + ", description=" + description + ", storage=" + storage + ", model=" + model
+                + ", brand=" + brand + ", condition=" + condition + ", color=" + color + ", shown=" + shown + ", sold="
+                + sold + "]";
+    }
+
+    public boolean isSold() {
+        return sold;
+    }
+
+    public void setSold(boolean sold) {
+        this.sold = sold;
+    }
 
     public Integer getId() {
         return id;

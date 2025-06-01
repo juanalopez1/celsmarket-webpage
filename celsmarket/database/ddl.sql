@@ -21,13 +21,12 @@ create table currencies(
 create table cities(
     id serial primary key,
     name varchar(50) not null,
-    country varchar(50) not null
+    country varchar(50) not null default 'Uruguay'
 );
 
 create table conditions(
     id serial primary key,
-    name varchar(50) not null unique,
-    observation text
+    name varchar(50) not null unique
 );
 
 create table storages(
@@ -45,7 +44,7 @@ create table cellphones(
     id_color int not null references colors(id),
     id_brand int not null references brands(id),
     id_condition int not null references conditions(id),
-    price int not null check ( price > 0 ),
+    price float(8) not null check ( price > 0 ),
     battery_condition int not null check ( battery_condition between 1 and 100),
     shown boolean not null default false,
     sold boolean not null default false
@@ -76,9 +75,8 @@ create table sales(
     date_hour timestamp not null default current_timestamp,
     id_client int not null references users(id),
     id_cellphone int not null references cellphones(id),
-    amount int not null check ( amount > 0 ),
     id_currency int not null references currencies(id) default 1,
-    address varchar(50) null,
+    address text null,
     id_city int not null references cities(id) default 1
 );
 

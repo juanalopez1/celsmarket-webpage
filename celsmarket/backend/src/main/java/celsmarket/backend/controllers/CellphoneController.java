@@ -47,7 +47,7 @@ public class CellphoneController {
             return validator.validate(result);
         }
         Optional<Cellphone> cellphoneOptional = cellphoneService.update(id, cellphone);
-        if (cellphoneOptional.isPresent()) {
+        if (cellphoneOptional.isPresent() && !cellphoneOptional.get().isSold()) {
             return ResponseEntity.status(HttpStatus.OK).body(cellphoneOptional.orElseThrow());
         }
         return ResponseEntity.notFound().build();
@@ -62,6 +62,20 @@ public class CellphoneController {
     @GetMapping("/availables")
     public List<Cellphone> listShown() {
         return (List<Cellphone>) cellphoneService.findAllShownCellphones();
+    }
+
+    @GetMapping("/availables/{id}")
+    public ResponseEntity<?> listOneShown(@PathVariable Integer id) {
+        List<Cellphone> availables = cellphoneService.findAllShownCellphones();
+        Optional<Cellphone> opCellphone = availables.stream()
+                .filter(c -> c.getId().equals(id))
+                .findFirst();
+        System.out.println("CELULAR" + opCellphone.toString());
+        if(opCellphone.isPresent()){
+            return ResponseEntity.ok(opCellphone.get());
+        }
+        return ResponseEntity.notFound().build();
+
     }
 
     @GetMapping("/{id}")

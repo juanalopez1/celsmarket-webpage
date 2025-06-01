@@ -8,6 +8,7 @@ import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
+import jakarta.persistence.OneToOne;
 import jakarta.persistence.Table;
 
 @Entity
@@ -22,12 +23,11 @@ public class Sale {
     @JoinColumn(name = "id_client", nullable = false, referencedColumnName = "id")
     private User client;
 
-    @ManyToOne
+    @OneToOne
     @JoinColumn(name = "id_cellphone", nullable = false, referencedColumnName = "id")
     private Cellphone cellphone;
 
     private Date date_hour;
-    private Integer amount;
 
     @ManyToOne
     @JoinColumn(name = "id_currency", nullable = false, referencedColumnName = "id")
@@ -69,14 +69,6 @@ public class Sale {
 
     public void setDate_hour(Date date_hour) {
         this.date_hour = date_hour;
-    }
-
-    public Integer getAmount() {
-        return amount;
-    }
-
-    public void setAmount(Integer amount) {
-        this.amount = amount;
     }
 
     public Currency getCurrency() {

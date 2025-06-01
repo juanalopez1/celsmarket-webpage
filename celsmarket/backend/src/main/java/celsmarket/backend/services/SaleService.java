@@ -42,7 +42,6 @@ public class SaleService implements ISaleService {
         if(saleToUpdate.isPresent()){
             Sale sale = saleToUpdate.orElseThrow();
             sale.setAddress(body.getAddress());
-            sale.setAmount(body.getAmount());
             sale.setCity(body.getCity());
             sale.setCurrency(body.getCurrency());
             sale.setCellphone(body.getCellphone());
