@@ -4,6 +4,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import celsmarket.backend.entities.Cellphone;
+import celsmarket.backend.repositories.CellphoneRepository;
 import celsmarket.backend.services.ICellphoneService;
 import celsmarket.backend.services.ValidationService;
 import jakarta.validation.Valid;
@@ -21,6 +22,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestParam;
 
 @RestController
 @RequestMapping("/inventory")
@@ -28,6 +30,9 @@ public class CellphoneController {
 
     @Autowired
     private ICellphoneService cellphoneService;
+
+    @Autowired
+    private CellphoneRepository cellphoneRepository;
 
     @Autowired
     private ValidationService validator;
@@ -71,7 +76,7 @@ public class CellphoneController {
                 .filter(c -> c.getId().equals(id))
                 .findFirst();
         System.out.println("CELULAR" + opCellphone.toString());
-        if(opCellphone.isPresent()){
+        if (opCellphone.isPresent()) {
             return ResponseEntity.ok(opCellphone.get());
         }
         return ResponseEntity.notFound().build();
@@ -96,5 +101,16 @@ public class CellphoneController {
         }
         return ResponseEntity.notFound().build();
     }
+
+    @GetMapping("/availables/filter")
+    public List<Cellphone> filter(
+            @RequestParam(required = false) String brand,
+            @RequestParam(required = false) String color,
+            @RequestParam(required = false) String condition,
+            @RequestParam(required = false) String model,
+            @RequestParam(required = false) String storage) {
+        return cellphoneRepository.filterAll(brand, color, condition, model, storage);
+    }
+    
 
 }

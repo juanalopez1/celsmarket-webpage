@@ -17,4 +17,5 @@ public interface ICellphoneService {
     void delete(Integer id);
 
     Optional<Cellphone> update(Integer id, Cellphone body);
+
 }
