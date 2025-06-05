@@ -1,5 +1,6 @@
 package celsmarket.backend.entities;
 
+import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
@@ -14,8 +15,8 @@ public class Condition {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
 
+    @Column(unique=true)
     private String name;
-    private String observations;
 
     public Integer getId() {
         return id;
@@ -31,14 +32,6 @@ public class Condition {
 
     public void setName(String name) {
         this.name = name;
-    }
-
-    public String getObservations() {
-        return observations;
-    }
-
-    public void setObservations(String observations) {
-        this.observations = observations;
     }
 
 }

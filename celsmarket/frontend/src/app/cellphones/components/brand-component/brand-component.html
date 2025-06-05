@@ -1,0 +1,6 @@
+<p>hola desde brands</p>
+@for (brand of this.brands(); track $index) {
+    <p>{{brand.name}}</p>
+    <button (click)='addBrand("alcatel")'>agregar</button>
+    <button (click)='deleteBrand(6)'>borrar</button>
+}

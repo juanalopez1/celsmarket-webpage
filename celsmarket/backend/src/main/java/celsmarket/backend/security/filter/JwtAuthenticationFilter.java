@@ -56,8 +56,6 @@ public class JwtAuthenticationFilter extends UsernamePasswordAuthenticationFilte
         }
 
         UsernamePasswordAuthenticationToken token = new UsernamePasswordAuthenticationToken(username, password);
-        System.out.println(token + " TOKEEEEN");
-        System.out.println(manager.authenticate(token) + " TOKEN");
         return manager.authenticate(token);
     }
 

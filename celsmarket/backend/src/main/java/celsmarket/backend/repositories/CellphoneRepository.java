@@ -31,5 +31,4 @@ public interface CellphoneRepository extends CrudRepository<Cellphone, Integer> 
             @Param("model") String model,
             @Param("storage") String storage);
 
-
 }

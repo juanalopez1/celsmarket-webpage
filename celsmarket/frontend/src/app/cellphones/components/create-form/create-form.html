@@ -1,0 +1,76 @@
+<form (ngSubmit)="onSubmit(cellphoneForm)" #cellphoneForm="ngForm">
+  <div>
+    <label>Marca:</label>
+    <select [(ngModel)]="cellphone.brand" name="brand" required>
+      <option *ngFor="let brand of brands" [ngValue]="brand">
+        {{ brand.name }}
+      </option>
+    </select>
+  </div>
+
+  <div>
+    <label>Modelo:</label>
+    <select [(ngModel)]="cellphone.model" name="model" required>
+      <option *ngFor="let model of models" [ngValue]="model">
+        {{ model.name }}
+      </option>
+    </select>
+  </div>
+
+  <div>
+    <label>Almacenamiento:</label>
+    <select [(ngModel)]="cellphone.storage" name="storage" required>
+      <option *ngFor="let storage of storages" [ngValue]="storage">
+        {{ storage.number }} {{ storage.unit }}
+      </option>
+    </select>
+  </div>
+
+  <div>
+    <label>Condición:</label>
+    <select [(ngModel)]="cellphone.condition" name="condition" required>
+      <option *ngFor="let condition of conditions" [ngValue]="condition">
+        {{ condition.name }}
+      </option>
+    </select>
+  </div>
+
+  <div>
+    <label>Color:</label>
+    <select [(ngModel)]="cellphone.color" name="color" required>
+      <option *ngFor="let color of colors" [ngValue]="color">
+        {{ color.name }}
+      </option>
+    </select>
+  </div>
+
+  <div>
+      <label>Precio:</label>
+      <input [(ngModel)]="cellphone.price" name="price" required />
+  </div>
+
+  <div>
+      <label>Stock:</label>
+      <input [(ngModel)]="cellphone.stock" name="stock" required min="0" />
+  </div>
+
+  <div>
+    <label>Condición batería:</label>
+  <input
+    [(ngModel)]="cellphone.batteryCondition"
+    name="batteryCondition"
+    required
+    min="30"
+    max="100"
+  />
+  </div>
+
+  <div>
+
+  <label>Descripción:</label>
+  <textarea [(ngModel)]="cellphone.description" name="description"></textarea>
+  </div>
+
+  <button type="submit" (click)="onSubmit(cellphoneForm)">Guardar</button>
+
+</form>

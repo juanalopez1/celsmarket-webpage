@@ -44,21 +44,38 @@ public class SecurityConfig {
     @Bean
     public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
         return http.authorizeHttpRequests(authz -> authz
+                .requestMatchers(HttpMethod.GET,
+                        "/brands/**",
+                        "/models/**",
+                        "/storages/**",
+                        "/colors/**",
+                        "/conditions/**")
+                .permitAll()
+                .requestMatchers(HttpMethod.POST,
+                        "/brands/**",
+                        "/models/**",
+                        "/storages/**",
+                        "/colors/**",
+                        "/conditions/**")
+                .hasRole("admin")
+                .requestMatchers(HttpMethod.DELETE,
+                        "/brands/**",
+                        "/models/**",
+                        "/storages/**",
+                        "/conditions/**",
+                        "/colors/**")
+                .hasRole("admin")
                 .requestMatchers(HttpMethod.POST, "/users/register").permitAll()
                 .requestMatchers(HttpMethod.GET, "/inventory/availables/**").permitAll()
-                .requestMatchers(HttpMethod.POST, "/inventory").hasRole("admin")
-                .requestMatchers(HttpMethod.DELETE, "/inventory").hasRole("admin")
-                .requestMatchers(HttpMethod.PUT, "/inventory").hasRole("admin")
-                .requestMatchers(HttpMethod.GET, "/inventory").hasRole("admin")
+                .requestMatchers("/inventory/**").permitAll()
+                //.requestMatchers(HttpMethod.POST, "/inventory").hasRole("admin")
+                //.requestMatchers(HttpMethod.DELETE, "/inventory").hasRole("admin")
+                //.requestMatchers(HttpMethod.PUT, "/inventory").hasRole("admin")
+                //.requestMatchers(HttpMethod.GET, "/inventory").hasRole("admin")
                 .requestMatchers(HttpMethod.GET, "/users").hasRole("admin")
-                .requestMatchers("/brands/**").hasRole("admin")
                 .requestMatchers("/sales/**").hasRole("admin")
                 .requestMatchers("/cities/**").hasRole("admin")
-                .requestMatchers("/colors/**").hasRole("admin")
-                .requestMatchers("/conditions/**").hasRole("admin")
                 .requestMatchers("/currencies/**").hasRole("admin")
-                .requestMatchers("/models/**").hasRole("admin")
-                .requestMatchers("/storages/**").hasRole("admin")
                 .requestMatchers("/sales/{id}").authenticated()
                 .requestMatchers("/users/{id}").authenticated()
                 .requestMatchers("/carts/**").permitAll()
@@ -76,7 +93,7 @@ public class SecurityConfig {
     @Bean
     CorsConfigurationSource corsConfigurationSource() {
         CorsConfiguration config = new CorsConfiguration();
-        config.setAllowedOriginPatterns(Arrays.asList("*"));
+        config.setAllowedOriginPatterns(Arrays.asList("http://localhost:4200"));
         config.setAllowedMethods(Arrays.asList("GET", "POST", "DELETE", "PUT"));
         config.setAllowedHeaders(Arrays.asList("Authorization", "Content-Type"));
         config.setAllowCredentials(true);
