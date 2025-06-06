@@ -1,7 +1,7 @@
 import { CommonModule } from '@angular/common';
 import { Component, signal, Signal } from '@angular/core';
-import { Cellphone } from '../../models/cellphone';
-import { CellphoneService } from '../../services/cellphone-service';
+import { Cellphone } from '../../../cellphones/models/cellphone';
+import { CellphoneService } from '../../../cellphones/services/cellphone-service';
 
 @Component({
   selector: 'app-inventory-component',

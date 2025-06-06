@@ -36,9 +36,9 @@ public class UserController {
         return userService.findAll();
     }
 
-    @GetMapping("/{id}")
-    public ResponseEntity<?> getOne(@PathVariable Integer id) {
-        Optional<User> userOptional = userService.findOne(id);
+    @GetMapping("/{email}")
+    public ResponseEntity<?> getOne(@PathVariable String email) {
+        Optional<User> userOptional = userService.findByEmail(email);
         if (userOptional.isPresent()) {
             return ResponseEntity.ok(userOptional.get());
         }

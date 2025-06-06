@@ -1,20 +1,13 @@
 import { CommonModule } from '@angular/common';
-import {
-  Component,
-  inject,
-  Inject,
-  Input,
-  OnInit,
-  Output,
-} from '@angular/core';
+import { Component, inject, Input, OnInit } from '@angular/core';
 import { FormsModule, NgForm } from '@angular/forms';
 import { Cellphone } from '../../models/cellphone';
-import { EventEmitter } from 'stream';
 import { SecondaryEntityService } from '../../services/seconday-entity-service';
 import { Secondary } from '../../models/secondary-entity';
 import { Storage } from '../../models/storage';
 import { StorageService } from '../../services/storage-service';
 import { CellphoneService } from '../../services/cellphone-service';
+import { BrandComponent } from '../brand-component/brand-component';
 
 @Component({
   selector: 'app-create-form',
@@ -23,9 +16,12 @@ import { CellphoneService } from '../../services/cellphone-service';
   templateUrl: './create-form.html',
 })
 export class CreateForm implements OnInit {
+  input: boolean = false;
   private secondaryService = inject(SecondaryEntityService);
   private storageService = inject(StorageService);
   private cellphoneService = inject(CellphoneService);
+
+  loading: boolean = true;
 
   brands: Secondary[] = [];
   colors: Secondary[] = [];
@@ -41,6 +37,7 @@ export class CreateForm implements OnInit {
       .then((c) => (this.conditions = c));
     this.secondaryService.findAll('models').then((m) => (this.models = m));
     this.storageService.findAll().then((data) => (this.storages = data));
+    this.loading = false;
   }
 
   @Input() cellphone: Cellphone = {
@@ -69,4 +66,17 @@ export class CreateForm implements OnInit {
     }
   }
 
+  switch() {
+    if (!this.input) {
+      this.input = true;
+    }
+  }
+
+  addNewSecondary(value: string, url: string) {
+    return this.secondaryService.create({ name: value }, url);
+  }
+
+  deleteSecondary(value: number, url: string) {
+    return this.secondaryService.remove(value, url);
+  }
 }

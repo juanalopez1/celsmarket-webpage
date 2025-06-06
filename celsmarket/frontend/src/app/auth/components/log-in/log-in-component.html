@@ -1,0 +1,30 @@
+<div class="flex items-center justify-center bg-gray-100">
+  <form (ngSubmit)="logIn(logInForm)" #logInForm="ngForm">
+    <h1 class="text-4xl font-bold">Inicia sesión</h1>
+    <p>¡Bienvenido de vuelta!</p>
+
+    <fieldset>
+      <legend class="fieldset-legend">Correo electrónico</legend>
+      <input
+        type="text"
+        class="input"
+        name="email"
+        [(ngModel)]="user.email"
+        required
+      />
+    </fieldset>
+
+    <fieldset>
+      <legend class="fieldset-legend">Contraseña</legend>
+      <input
+        type="password"
+        class="input"
+        name="password"
+        [(ngModel)]="user.password"
+        required
+      />
+    </fieldset>
+
+    <button class="btn btn-soft btn-primary">Ingresar</button>
+  </form>
+</div>

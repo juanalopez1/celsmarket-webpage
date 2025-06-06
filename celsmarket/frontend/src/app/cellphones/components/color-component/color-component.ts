@@ -11,7 +11,6 @@ import { SecondaryEntityService } from '../../services/seconday-entity-service';
 })
 export class ColorComponent {
   colors = signal<Secondary[]>([]);
-
   constructor(private service: SecondaryEntityService) {}
 
   async ngOnInit() {

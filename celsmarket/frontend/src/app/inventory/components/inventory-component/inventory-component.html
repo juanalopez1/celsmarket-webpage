@@ -1,0 +1,19 @@
+@for (cell of this.cellphones(); track $index) {
+<div class="card bg-base-100 w-96 shadow-sm">
+  <figure>
+    <img
+      src="https://img.daisyui.com/images/stock/photo-1606107557195-0e29a4b5b4aa.webp"
+      alt="{{cell.model.name}}"
+    />
+  </figure>
+  <div class="card-body">
+    <h2 class="card-title">{{cell.model.name}}</h2>
+    <p>
+      {{cell.description}}
+    </p>
+    <div class="card-actions justify-end">
+      <button class="btn btn-primary">Ver mas</button>
+    </div>
+  </div>
+</div>
+}

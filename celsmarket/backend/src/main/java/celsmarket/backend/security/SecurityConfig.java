@@ -64,7 +64,7 @@ public class SecurityConfig {
                         "/storages/**",
                         "/conditions/**",
                         "/colors/**")
-                .hasRole("admin")
+                .permitAll()
                 .requestMatchers(HttpMethod.POST, "/users/register").permitAll()
                 .requestMatchers(HttpMethod.GET, "/inventory/availables/**").permitAll()
                 .requestMatchers("/inventory/**").permitAll()

@@ -1,76 +1,151 @@
-<form (ngSubmit)="onSubmit(cellphoneForm)" #cellphoneForm="ngForm">
-  <div>
-    <label>Marca:</label>
-    <select [(ngModel)]="cellphone.brand" name="brand" required>
-      <option *ngFor="let brand of brands" [ngValue]="brand">
-        {{ brand.name }}
-      </option>
-    </select>
-  </div>
+<div class="flex items-center justify-center bg-gray-100">
+  <form (ngSubmit)="onSubmit(cellphoneForm)" #cellphoneForm="ngForm">
+    <legend class="fieldset-legend text-xl font-normal">Marca</legend>
+    <div>
+      @if (!this.loading) {
+      <fieldset class="fieldset">
+        <div class="flex items-center gap-2">
+          <select class="select">
+            <option disabled selected>Seleccionar</option>
+            @for (brand of this.brands; track $index) {
+            <option>{{brand.name}}</option>
+            }
+          </select>
+          <button type="button" (click)="switch()">
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              width="24"
+              height="24"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="2"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              class="lucide lucide-plus-icon lucide-plus"
+            >
+              <path d="M5 12h14" />
+              <path d="M12 5v14" />
+            </svg>
+          </button>
+          @if (this.input) {
+          <div>
+            <input #brandInput placeholder="Nueva marca" name="marca" />
+            <button
+              type="button"
+              (click)="addNewSecondary(brandInput.value, 'brands')"
+            >
+              Guardar
+            </button>
+          </div>
+          }
+        </div>
+      </fieldset>
+      } @else {
+      <span class="loading loading-dots loading-sm"></span>
+      }
+    </div>
 
-  <div>
-    <label>Modelo:</label>
-    <select [(ngModel)]="cellphone.model" name="model" required>
-      <option *ngFor="let model of models" [ngValue]="model">
-        {{ model.name }}
-      </option>
-    </select>
-  </div>
+    <div>
+      <label>Modelo:</label>
+      <select [(ngModel)]="cellphone.model" name="model" required>
+        <option *ngFor="let model of models" [ngValue]="model">
+          {{ model.name }}
+        </option>
+      </select>
+    </div>
 
-  <div>
-    <label>Almacenamiento:</label>
-    <select [(ngModel)]="cellphone.storage" name="storage" required>
-      <option *ngFor="let storage of storages" [ngValue]="storage">
-        {{ storage.number }} {{ storage.unit }}
-      </option>
-    </select>
-  </div>
+    <div>
+      <label>Almacenamiento:</label>
+      <select [(ngModel)]="cellphone.storage" name="storage" required>
+        <option *ngFor="let storage of storages" [ngValue]="storage">
+          {{ storage.number }} {{ storage.unit }}
+        </option>
+      </select>
+    </div>
 
-  <div>
-    <label>Condición:</label>
-    <select [(ngModel)]="cellphone.condition" name="condition" required>
-      <option *ngFor="let condition of conditions" [ngValue]="condition">
-        {{ condition.name }}
-      </option>
-    </select>
-  </div>
+    <div>
+      <label>Condición:</label>
+      <select [(ngModel)]="cellphone.condition" name="condition" required>
+        <option *ngFor="let condition of conditions" [ngValue]="condition">
+          {{ condition.name }}
+        </option>
+      </select>
+    </div>
 
-  <div>
-    <label>Color:</label>
-    <select [(ngModel)]="cellphone.color" name="color" required>
-      <option *ngFor="let color of colors" [ngValue]="color">
-        {{ color.name }}
-      </option>
-    </select>
-  </div>
+    <div>
+      <label>Color:</label>
+      <select [(ngModel)]="cellphone.color" name="color" required>
+        <option *ngFor="let color of colors" [ngValue]="color">
+          {{ color.name }}
+        </option>
+      </select>
+    </div>
 
-  <div>
+    <div>
       <label>Precio:</label>
       <input [(ngModel)]="cellphone.price" name="price" required />
-  </div>
+    </div>
 
-  <div>
+    <div>
       <label>Stock:</label>
       <input [(ngModel)]="cellphone.stock" name="stock" required min="0" />
-  </div>
+    </div>
 
-  <div>
-    <label>Condición batería:</label>
-  <input
-    [(ngModel)]="cellphone.batteryCondition"
-    name="batteryCondition"
-    required
-    min="30"
-    max="100"
-  />
-  </div>
+    <div>
+      <label>Condición batería:</label>
+      <input
+        [(ngModel)]="cellphone.batteryCondition"
+        name="batteryCondition"
+        required
+        min="30"
+        max="100"
+      />
+    </div>
 
-  <div>
+    <div>
+      <label>Descripción:</label>
+      <textarea
+        [(ngModel)]="cellphone.description"
+        name="description"
+      ></textarea>
+    </div>
 
-  <label>Descripción:</label>
-  <textarea [(ngModel)]="cellphone.description" name="description"></textarea>
-  </div>
+    <div>
+      <label>Mostrar disponible automaticamente </label>
+      <label class="toggle text-base-content">
+        <input type="checkbox" [(ngModel)]="cellphone.shown" name="shown" />
+        <svg
+          aria-label="enabled"
+          xmlns="http://www.w3.org/2000/svg"
+          viewBox="0 0 24 24"
+        >
+          <g
+            stroke-linejoin="round"
+            stroke-linecap="round"
+            stroke-width="4"
+            fill="none"
+            stroke="currentColor"
+          >
+            <path d="M20 6 9 17l-5-5"></path>
+          </g>
+        </svg>
+        <svg
+          aria-label="disabled"
+          xmlns="http://www.w3.org/2000/svg"
+          viewBox="0 0 24 24"
+          fill="none"
+          stroke="currentColor"
+          stroke-width="4"
+          stroke-linecap="round"
+          stroke-linejoin="round"
+        >
+          <path d="M18 6 6 18" />
+          <path d="m6 6 12 12" />
+        </svg>
+      </label>
+    </div>
 
-  <button type="submit" (click)="onSubmit(cellphoneForm)">Guardar</button>
-
-</form>
+    <button type="submit" (click)="onSubmit(cellphoneForm)">Guardar</button>
+  </form>
+</div>

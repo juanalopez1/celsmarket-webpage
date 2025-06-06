@@ -1,0 +1,40 @@
+<div class="bg-blue-950 flex items-center justify-center gap-2 p-2">
+  <h2 class="text-amber-50 font-bold">{{this.message}}</h2>
+  @if(this.allowed){
+  <!-- Open the modal using ID.showModal() method -->
+  <button class="btn btn-ghost btn-xs" onclick="my_modal_1.showModal()">
+    <svg
+      xmlns="http://www.w3.org/2000/svg"
+      width="20"
+      height="20"
+      viewBox="0 0 24 24"
+      fill="none"
+      stroke="white"
+      stroke-width="2"
+      stroke-linecap="round"
+      stroke-linejoin="round"
+      class="lucide lucide-pencil-icon lucide-pencil"
+    >
+      <path
+        d="M21.174 6.812a1 1 0 0 0-3.986-3.987L3.842 16.174a2 2 0 0 0-.5.83l-1.321 4.352a.5.5 0 0 0 .623.622l4.353-1.32a2 2 0 0 0 .83-.497z"
+      />
+      <path d="m15 5 4 4" />
+    </svg>  
+  </button>
+  <dialog id="my_modal_1" class="modal">
+    <div class="modal-box">
+      <h3 class="text-lg font-bold">Nuevo mensaje a mostrar:</h3>
+      <input #messageInput class="input input-info" value="{{this.message}}" />
+      <div class="modal-action">
+        <form method="dialog">
+          <!-- if there is a button in form, it will close the modal -->
+          <button class="btn">Cerrar</button>
+        </form>
+        <button class="btn" (click)="changeMessage(messageInput.value)">
+          Guardar
+        </button>
+      </div>
+    </div>
+  </dialog>
+  }
+</div>

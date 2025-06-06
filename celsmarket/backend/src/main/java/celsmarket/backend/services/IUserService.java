@@ -8,6 +8,8 @@ import celsmarket.backend.entities.User;
 public interface IUserService {
     List<User> findAll();
 
+    Optional<User> findByEmail(String email);
+
     Optional<User> findOne(Integer id);
 
     User save(User user);

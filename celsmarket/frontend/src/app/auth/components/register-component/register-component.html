@@ -1,0 +1,41 @@
+<div class="flex items-center justify-center bg-gray-100">
+  <form (ngSubmit)="registerNew(registerForm)" #registerForm="ngForm">
+    <h1 class="text-4xl font-bold">Crear cuenta</h1>
+    <p>Unite a nuestra comunidad para seleccionar tus favoritos!</p>
+
+    <fieldset class="fieldset">
+      <legend class="fieldset-legend">Nombre completo</legend>
+      <input
+        type="text"
+        class="input"
+        name="name"
+        [(ngModel)]="user.name"
+        required
+      />
+    </fieldset>
+
+    <fieldset class="fieldset">
+      <legend class="fieldset-legend">Correo electronico</legend>
+      <input
+        type="text"
+        class="input"
+        name="email"
+        [(ngModel)]="user.email"
+        required
+      />
+    </fieldset>
+
+    <fieldset class="fieldset">
+      <legend class="fieldset-legend">Contrasena</legend>
+      <input
+        type="password"
+        class="input"
+        name="password"
+        [(ngModel)]="user.password"
+        required
+      />
+    </fieldset>
+
+    <button class="btn btn-soft btn-primary">Registrarme</button>
+  </form>
+</div>

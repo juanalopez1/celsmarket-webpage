@@ -1,7 +1,8 @@
 import { CommonModule } from '@angular/common';
-import { Component, OnInit, signal } from '@angular/core';
+import { Component, OnInit, Output, signal } from '@angular/core';
 import { Secondary } from '../../models/secondary-entity';
 import { SecondaryEntityService } from '../../services/seconday-entity-service';
+import { EventEmitter } from 'stream';
 
 @Component({
   selector: 'app-brand',
@@ -10,10 +11,12 @@ import { SecondaryEntityService } from '../../services/seconday-entity-service';
   templateUrl: './brand-component.html',
 })
 export class BrandComponent implements OnInit {
+  input: boolean = false;
   brands = signal<Secondary[]>([]);
 
   constructor(private service: SecondaryEntityService) {}
 
+  
   async ngOnInit() {
     await this.loadBrands();
   }

@@ -20,6 +20,7 @@ export class SecondaryEntityService {
 
   async create(data: { "name": string }, entity : string ): Promise<Secondary> {
     data.name = data.name.charAt(0).toUpperCase() + data.name.slice(1).toLowerCase();
+    console.log(data, "en createe")
     const response = await axios.post(this.url + "/" + entity, data);
     return response.data as Secondary;
   }
