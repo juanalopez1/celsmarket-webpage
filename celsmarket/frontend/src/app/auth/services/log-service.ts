@@ -15,7 +15,6 @@ export class LogService {
   async logIn(user: User) {
     try {
       const body = { email: user.email, password: user.password };
-      console.log(JSON.stringify(body) + ' ESTO SE MANDA AL BACKKKK');
       const response = await axios.post(this.url + '/login', body);
       if (typeof window !== 'undefined' && typeof localStorage !== 'undefined')
       localStorage.setItem('token', response.data.token);

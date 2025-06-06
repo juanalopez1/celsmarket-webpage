@@ -1,0 +1,31 @@
+<!-- Open the modal using ID.showModal() method -->
+<button class="btn btn-square btn-ghost" onclick="my_modal_details.showModal()">
+  <svg
+    xmlns="http://www.w3.org/2000/svg"
+    width="24"
+    height="24"
+    viewBox="0 0 24 24"
+    fill="none"
+    stroke="currentColor"
+    stroke-width="2"
+    stroke-linecap="round"
+    stroke-linejoin="round"
+    class="lucide lucide-eye-icon lucide-eye"
+  >
+    <path
+      d="M2.062 12.348a1 1 0 0 1 0-.696 10.75 10.75 0 0 1 19.876 0 1 1 0 0 1 0 .696 10.75 10.75 0 0 1-19.876 0"
+    />
+    <circle cx="12" cy="12" r="3" />
+  </svg>
+</button>
+<dialog id="my_modal_details" class="modal">
+  <div class="modal-box">
+    <h3 class="text-lg font-bold">{{this.thisSale?.cellphone?.model}}</h3>
+    <p class="py-4">{{this.thisSale?.address}}</p>
+    <div class="modal-action">
+      <form method="dialog">
+        <button class="btn">Cerrar</button>
+      </form>
+    </div>
+  </div>
+</dialog>

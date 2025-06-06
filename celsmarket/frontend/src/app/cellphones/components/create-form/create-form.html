@@ -1,92 +1,117 @@
-<div class="flex items-center justify-center bg-gray-100">
-  <form (ngSubmit)="onSubmit(cellphoneForm)" #cellphoneForm="ngForm">
-    <app-select-secondary-component
-      [componentFor]="'Marca'"
-    ></app-select-secondary-component>
+<form (ngSubmit)="onSubmit(cellphoneForm)" #cellphoneForm="ngForm">
+  <legend class="fieldset-legend text-l font-semibold">Marca</legend>
+  <div class="flex items-center justify-center p-2">
+    <div class="flex-1 max-w-md">
+      <app-select-secondary-component
+        [componentFor]="'Marca'"
+      ></app-select-secondary-component>
+    </div>
     <app-add-secondary-component [url]="'brands'"></app-add-secondary-component>
-    <app-select-secondary-component
-      [componentFor]="'Modelo'"
-    ></app-select-secondary-component>
-    <app-add-secondary-component [url]="'models'"></app-add-secondary-component>
-    <app-select-secondary-component
-      [componentFor]="'Color'"
-    ></app-select-secondary-component>
-    <app-add-secondary-component [url]="'colors'"></app-add-secondary-component>
-    <app-select-secondary-component
-      [componentFor]="'Condición'"
-    ></app-select-secondary-component>
-    <app-add-secondary-component
-      [url]="'conditions'"
-    ></app-add-secondary-component>
-    <app-select-secondary-component
-      [componentFor]="'Almacenamiento'"
-    ></app-select-secondary-component>
-    <app-add-secondary-component
-      [url]="'storages'"
-    ></app-add-secondary-component>
+  </div>
+  <app-select-secondary-component
+    [componentFor]="'Modelo'"
+  ></app-select-secondary-component>
+  <app-add-secondary-component [url]="'models'"></app-add-secondary-component>
+  <app-select-secondary-component
+    [componentFor]="'Color'"
+  ></app-select-secondary-component>
+  <app-add-secondary-component [url]="'colors'"></app-add-secondary-component>
+  <app-select-secondary-component
+    [componentFor]="'Condición'"
+  ></app-select-secondary-component>
+  <app-add-secondary-component
+    [url]="'conditions'"
+  ></app-add-secondary-component>
+  <app-select-secondary-component
+    [componentFor]="'Almacenamiento'"
+  ></app-select-secondary-component>
+  <app-add-secondary-component [url]="'storages'"></app-add-secondary-component>
 
-    <div>
-      <legend class="fieldset-legend text-l font-semibold">Precio</legend>
-      <input [(ngModel)]="cellphone.price" name="price" class="input input-info" required />
-    </div>
+  <div>
+    <legend class="fieldset-legend text-l font-semibold">Precio</legend>
+    <input
+      [(ngModel)]="cellphone.price"
+      name="price"
+      class="input input-info"
+      required
+    />
+  </div>
 
-    <div>
-      <legend class="fieldset-legend text-l font-semibold">Stock</legend>
-      <input [(ngModel)]="cellphone.stock" name="stock" class="input input-info" required min="0" />
-    </div>
+  <div>
+    <legend class="fieldset-legend text-l font-semibold">Stock</legend>
+    <input
+      [(ngModel)]="cellphone.stock"
+      name="stock"
+      class="input input-info"
+      required
+      min="0"
+    />
+  </div>
 
-    <div>
-      <legend class="fieldset-legend text-l font-semibold">Condición de la bateria</legend>
-      <input
-        [(ngModel)]="cellphone.batteryCondition"
-        name="batteryCondition"
-        required
-        min="30"
-        max="100"
-        class="input input-info"
-      />
-    </div>
+  <div>
+    <legend class="fieldset-legend text-l font-semibold">
+      Condición de la bateria
+    </legend>
+    <input
+      [(ngModel)]="cellphone.batteryCondition"
+      name="batteryCondition"
+      required
+      min="30"
+      max="100"
+      class="input input-info"
+    />
+  </div>
 
-    <div>
-      <legend class="fieldset-legend text-l font-semibold">Description</legend>
-      <textarea class="textarea textarea-success" [(ngModel)]="cellphone.description"></textarea>
-    </div>
+  <div>
+    <legend class="fieldset-legend text-l font-semibold">Description</legend>
+    <textarea
+      class="textarea textarea-success"
+      [(ngModel)]="cellphone.description"
+    ></textarea>
+  </div>
 
-    <div>
-      <legend class="fieldset-legend text-l font-semibold">Mostrar disponible automaticamente</legend>
-      <label class="toggle text-base-content">
-        <input type="checkbox" [(ngModel)]="cellphone.shown" name="shown" />
-        <svg
-          aria-label="enabled"
-          xmlns="http://www.w3.org/2000/svg"
-          viewBox="0 0 24 24"
-        >
-          <g
-            stroke-linejoin="round"
-            stroke-linecap="round"
-            stroke-width="4"
-            fill="none"
-            stroke="currentColor"
-          >
-            <path d="M20 6 9 17l-5-5"></path>
-          </g>
-        </svg>
-        <svg
-          aria-label="disabled"
-          xmlns="http://www.w3.org/2000/svg"
-          viewBox="0 0 24 24"
+  <div class="flex items-center justify-center gap-4 p-2">
+    <legend class="fieldset-legend text-l font-semibold">
+      Mostrar disponible automaticamente
+    </legend>
+    <label class="toggle text-base-content">
+      <input type="checkbox" [(ngModel)]="cellphone.shown" name="shown" />
+      <svg
+        aria-label="enabled"
+        xmlns="http://www.w3.org/2000/svg"
+        viewBox="0 0 24 24"
+      >
+        <g
+          stroke-linejoin="round"
+          stroke-linecap="round"
+          stroke-width="4"
           fill="none"
           stroke="currentColor"
-          stroke-width="4"
-          stroke-linecap="round"
-          stroke-linejoin="round"
         >
-          <path d="M18 6 6 18" />
-          <path d="m6 6 12 12" />
-        </svg>
-      </label>
-    </div>
+          <path d="M20 6 9 17l-5-5"></path>
+        </g>
+      </svg>
+      <svg
+        aria-label="disabled"
+        xmlns="http://www.w3.org/2000/svg"
+        viewBox="0 0 24 24"
+        fill="none"
+        stroke="currentColor"
+        stroke-width="4"
+        stroke-linecap="round"
+        stroke-linejoin="round"
+      >
+        <path d="M18 6 6 18" />
+        <path d="m6 6 12 12" />
+      </svg>
+    </label>
+  </div>
 
-    <button type="submit" (click)="onSubmit(cellphoneForm)">Guardar</button>
-  </form>
-</div>
+  <button
+    type="submit"
+    class="btn btn-soft btn-info"
+    (click)="onSubmit(cellphoneForm)"
+  >
+    Guardar
+  </button>
+</form>

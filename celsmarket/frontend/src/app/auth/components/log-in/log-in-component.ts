@@ -20,7 +20,6 @@ export class LogInComponent {
 
   logIn(form: NgForm) {
     if (form.valid) {
-      console.log(JSON.stringify(this.user) + 'user');
       this.logService.logIn(this.user);
       form.reset();
     }

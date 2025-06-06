@@ -1,4 +1,4 @@
-import { Component, inject, Input } from '@angular/core';
+import { Component, ElementRef, inject, Input, ViewChild } from '@angular/core';
 import { SecondaryEntityService } from '../../services/seconday-entity-service';
 
 @Component({
@@ -8,12 +8,7 @@ import { SecondaryEntityService } from '../../services/seconday-entity-service';
 })
 export class AddSecondaryComponent {
   private secondaryService = inject(SecondaryEntityService);
-  input: boolean = false;
   @Input() url : string = '';
-
-  switch() {
-    this.input = !this.input;
-  }
 
   addNewSecondary(value: string, url: string) {
     return this.secondaryService.create({ name: value }, url);

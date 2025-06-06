@@ -2,14 +2,12 @@ import { Component, inject, Input, OnInit } from '@angular/core';
 import { Secondary } from '../../models/secondary-entity';
 import { SecondaryEntityService } from '../../services/seconday-entity-service';
 import { StorageService } from '../../services/storage-service';
-import { Storage } from '../../models/storage';
-import { AddSecondaryComponent } from "../add-secondary-component/add-secondary-component";
 
 @Component({
   selector: 'app-select-secondary-component',
   templateUrl: './select-secondary-component.html',
   styles: ``,
-  imports: [AddSecondaryComponent],
+  imports: [],
 })
 export class SelectSecondaryComponent implements OnInit {
   @Input() componentFor: string = '';

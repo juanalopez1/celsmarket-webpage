@@ -12,7 +12,6 @@ export class StorageService {
   private url: string = 'http://localhost:8080/storages';
 
   async findAll(): Promise<Secondary[]> {
-    console.log((await axios.get(this.url)).data);
     const response = await axios.get(this.url);
     const transformedData: Secondary[] = response.data.map((item: any) => ({
       id: item.id,

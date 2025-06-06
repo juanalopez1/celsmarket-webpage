@@ -8,13 +8,13 @@ import { UserService } from '../../../auth/services/user-service';
   templateUrl: './notice-component.html',
 })
 export class NoticeComponent implements OnInit {
+  allowed: boolean = false;
   ngOnInit(): void {
     this.isAllowed();
   }
   private userService = inject(UserService);
 
   public message: string = 'ENVIOS A TODO URUGUAY!';
-  allowed: boolean = false;
 
   changeMessage(newMessage: string) {
     this.message = newMessage;

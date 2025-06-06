@@ -3,11 +3,7 @@ import { Component, inject, Input, OnInit } from '@angular/core';
 import { FormsModule, NgForm } from '@angular/forms';
 import { Cellphone } from '../../models/cellphone';
 import { SecondaryEntityService } from '../../services/seconday-entity-service';
-import { Secondary } from '../../models/secondary-entity';
-import { Storage } from '../../models/storage';
-import { StorageService } from '../../services/storage-service';
 import { CellphoneService } from '../../services/cellphone-service';
-import { BrandComponent } from '../brand-component/brand-component';
 import { AddSecondaryComponent } from "../add-secondary-component/add-secondary-component";
 import { SelectSecondaryComponent } from "../select-secondary-component/select-secondary-component";
 

@@ -1,4 +1,4 @@
-<button type="button" (click)="switch()">
+<button class="btn btn-ghost" onclick="my_modal_add.showModal()">
   <svg
     xmlns="http://www.w3.org/2000/svg"
     width="24"
@@ -15,9 +15,24 @@
     <path d="M12 5v14" />
   </svg>
 </button>
-@if (this.input) {
-<div class="flex items-center justify-center gap-2 p-2">
-    <input #newInput type="text" placeholder="Nuevo elemento" class="input input-info" />
-    <button class="btn btn-soft btn-info" (click)="addNewSecondary(newInput.value, this.url)">Guardar</button>
-</div>
-}
+<dialog id="my_modal_add" class="modal">
+  <div class="modal-box">
+    <form method="dialog">
+      <button class="btn btn-sm btn-circle btn-ghost absolute right-2 top-2">
+        ✕
+      </button>
+    </form>
+    <input
+      #newInput
+      type="text"
+      placeholder="Nuevo elemento"
+      class="input input-info"
+    />
+    <button
+      class="btn btn-soft btn-info"
+      (click)="addNewSecondary(newInput.value, this.url)"
+    >
+      Guardar
+    </button>
+  </div>
+</dialog>

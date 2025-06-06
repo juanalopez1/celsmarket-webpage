@@ -73,7 +73,7 @@ public class SecurityConfig {
                 //.requestMatchers(HttpMethod.PUT, "/inventory").hasRole("admin")
                 //.requestMatchers(HttpMethod.GET, "/inventory").hasRole("admin")
                 .requestMatchers(HttpMethod.GET, "/users").hasRole("admin")
-                .requestMatchers("/sales/**").hasRole("admin")
+                .requestMatchers("/sales/**").permitAll()
                 .requestMatchers("/cities/**").hasRole("admin")
                 .requestMatchers("/currencies/**").hasRole("admin")
                 .requestMatchers("/sales/{id}").authenticated()

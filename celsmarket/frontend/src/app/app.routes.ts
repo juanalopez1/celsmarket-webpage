@@ -7,13 +7,13 @@ export const routes: Routes = [
     path: 'inventory',
     component: inventoryComponent,
   },
+    {
+      path: 'login',
+      component: LogInComponent,
+    },
   {
     path: '',
     redirectTo: 'inventory',
     pathMatch: 'full',
-  },
-  {
-    path: 'login',
-    component: LogInComponent,
   },
 ];
