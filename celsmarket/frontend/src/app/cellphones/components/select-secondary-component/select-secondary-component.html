@@ -1,0 +1,19 @@
+<legend class="fieldset-legend text-l font-semibold">
+  {{this.componentFor}}
+</legend>
+<div>
+  @if(this.loading){
+  <span class="loading loading-dots loading-sm"></span>
+  } @else {
+  <fieldset class="fieldset ">   
+    <div class="flex items-center gap-2">
+      <select class="select select-info">
+        <option disabled selected>Seleccionar</option>
+        @for (element of this.returnList(); track $index) {
+        <option>{{element.name}}</option>
+        }
+      </select>
+    </div>
+  </fieldset>
+  }
+</div>

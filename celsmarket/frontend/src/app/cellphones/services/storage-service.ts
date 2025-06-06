@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import axios from 'axios';
 import { Storage } from '../models/storage';
+import { Secondary } from '../models/secondary-entity';
 
 @Injectable({
   providedIn: 'root',
@@ -10,10 +11,14 @@ export class StorageService {
 
   private url: string = 'http://localhost:8080/storages';
 
-  async findAll(): Promise<Storage[]> {
+  async findAll(): Promise<Secondary[]> {
     console.log((await axios.get(this.url)).data);
     const response = await axios.get(this.url);
-    return response.data as Storage[];
+    const transformedData: Secondary[] = response.data.map((item: any) => ({
+      id: item.id,
+      name: `${item.number} ${item.unit}`, // combinación
+    }));
+    return transformedData as Secondary[];
   }
 
   async create(data: { number: number; unit: string }): Promise<Storage> {

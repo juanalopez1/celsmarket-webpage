@@ -28,6 +28,7 @@ export class ConditionComponent {
 
   async addCondition(newCondition: string) {
     try {
+      
       const created = await this.service.create(
         { name: newCondition },
         'conditions'

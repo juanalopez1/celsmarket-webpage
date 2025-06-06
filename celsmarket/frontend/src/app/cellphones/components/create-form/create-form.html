@@ -1,118 +1,59 @@
 <div class="flex items-center justify-center bg-gray-100">
   <form (ngSubmit)="onSubmit(cellphoneForm)" #cellphoneForm="ngForm">
-    <legend class="fieldset-legend text-xl font-normal">Marca</legend>
+    <app-select-secondary-component
+      [componentFor]="'Marca'"
+    ></app-select-secondary-component>
+    <app-add-secondary-component [url]="'brands'"></app-add-secondary-component>
+    <app-select-secondary-component
+      [componentFor]="'Modelo'"
+    ></app-select-secondary-component>
+    <app-add-secondary-component [url]="'models'"></app-add-secondary-component>
+    <app-select-secondary-component
+      [componentFor]="'Color'"
+    ></app-select-secondary-component>
+    <app-add-secondary-component [url]="'colors'"></app-add-secondary-component>
+    <app-select-secondary-component
+      [componentFor]="'Condición'"
+    ></app-select-secondary-component>
+    <app-add-secondary-component
+      [url]="'conditions'"
+    ></app-add-secondary-component>
+    <app-select-secondary-component
+      [componentFor]="'Almacenamiento'"
+    ></app-select-secondary-component>
+    <app-add-secondary-component
+      [url]="'storages'"
+    ></app-add-secondary-component>
+
     <div>
-      @if (!this.loading) {
-      <fieldset class="fieldset">
-        <div class="flex items-center gap-2">
-          <select class="select">
-            <option disabled selected>Seleccionar</option>
-            @for (brand of this.brands; track $index) {
-            <option>{{brand.name}}</option>
-            }
-          </select>
-          <button type="button" (click)="switch()">
-            <svg
-              xmlns="http://www.w3.org/2000/svg"
-              width="24"
-              height="24"
-              viewBox="0 0 24 24"
-              fill="none"
-              stroke="currentColor"
-              stroke-width="2"
-              stroke-linecap="round"
-              stroke-linejoin="round"
-              class="lucide lucide-plus-icon lucide-plus"
-            >
-              <path d="M5 12h14" />
-              <path d="M12 5v14" />
-            </svg>
-          </button>
-          @if (this.input) {
-          <div>
-            <input #brandInput placeholder="Nueva marca" name="marca" />
-            <button
-              type="button"
-              (click)="addNewSecondary(brandInput.value, 'brands')"
-            >
-              Guardar
-            </button>
-          </div>
-          }
-        </div>
-      </fieldset>
-      } @else {
-      <span class="loading loading-dots loading-sm"></span>
-      }
+      <legend class="fieldset-legend text-l font-semibold">Precio</legend>
+      <input [(ngModel)]="cellphone.price" name="price" class="input input-info" required />
     </div>
 
     <div>
-      <label>Modelo:</label>
-      <select [(ngModel)]="cellphone.model" name="model" required>
-        <option *ngFor="let model of models" [ngValue]="model">
-          {{ model.name }}
-        </option>
-      </select>
+      <legend class="fieldset-legend text-l font-semibold">Stock</legend>
+      <input [(ngModel)]="cellphone.stock" name="stock" class="input input-info" required min="0" />
     </div>
 
     <div>
-      <label>Almacenamiento:</label>
-      <select [(ngModel)]="cellphone.storage" name="storage" required>
-        <option *ngFor="let storage of storages" [ngValue]="storage">
-          {{ storage.number }} {{ storage.unit }}
-        </option>
-      </select>
-    </div>
-
-    <div>
-      <label>Condición:</label>
-      <select [(ngModel)]="cellphone.condition" name="condition" required>
-        <option *ngFor="let condition of conditions" [ngValue]="condition">
-          {{ condition.name }}
-        </option>
-      </select>
-    </div>
-
-    <div>
-      <label>Color:</label>
-      <select [(ngModel)]="cellphone.color" name="color" required>
-        <option *ngFor="let color of colors" [ngValue]="color">
-          {{ color.name }}
-        </option>
-      </select>
-    </div>
-
-    <div>
-      <label>Precio:</label>
-      <input [(ngModel)]="cellphone.price" name="price" required />
-    </div>
-
-    <div>
-      <label>Stock:</label>
-      <input [(ngModel)]="cellphone.stock" name="stock" required min="0" />
-    </div>
-
-    <div>
-      <label>Condición batería:</label>
+      <legend class="fieldset-legend text-l font-semibold">Condición de la bateria</legend>
       <input
         [(ngModel)]="cellphone.batteryCondition"
         name="batteryCondition"
         required
         min="30"
         max="100"
+        class="input input-info"
       />
     </div>
 
     <div>
-      <label>Descripción:</label>
-      <textarea
-        [(ngModel)]="cellphone.description"
-        name="description"
-      ></textarea>
+      <legend class="fieldset-legend text-l font-semibold">Description</legend>
+      <textarea class="textarea textarea-success" [(ngModel)]="cellphone.description"></textarea>
     </div>
 
     <div>
-      <label>Mostrar disponible automaticamente </label>
+      <legend class="fieldset-legend text-l font-semibold">Mostrar disponible automaticamente</legend>
       <label class="toggle text-base-content">
         <input type="checkbox" [(ngModel)]="cellphone.shown" name="shown" />
         <svg

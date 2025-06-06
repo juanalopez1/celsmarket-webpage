@@ -8,37 +8,19 @@ import { Storage } from '../../models/storage';
 import { StorageService } from '../../services/storage-service';
 import { CellphoneService } from '../../services/cellphone-service';
 import { BrandComponent } from '../brand-component/brand-component';
+import { AddSecondaryComponent } from "../add-secondary-component/add-secondary-component";
+import { SelectSecondaryComponent } from "../select-secondary-component/select-secondary-component";
 
 @Component({
   selector: 'app-create-form',
-  imports: [CommonModule, FormsModule],
+  imports: [CommonModule, FormsModule, AddSecondaryComponent, SelectSecondaryComponent],
   standalone: true,
   templateUrl: './create-form.html',
 })
-export class CreateForm implements OnInit {
-  input: boolean = false;
+export class CreateForm {
   private secondaryService = inject(SecondaryEntityService);
-  private storageService = inject(StorageService);
   private cellphoneService = inject(CellphoneService);
 
-  loading: boolean = true;
-
-  brands: Secondary[] = [];
-  colors: Secondary[] = [];
-  conditions: Secondary[] = [];
-  models: Secondary[] = [];
-  storages: Storage[] = [];
-
-  ngOnInit(): void {
-    this.secondaryService.findAll('brands').then((b) => (this.brands = b));
-    this.secondaryService.findAll('colors').then((c) => (this.colors = c));
-    this.secondaryService
-      .findAll('conditions')
-      .then((c) => (this.conditions = c));
-    this.secondaryService.findAll('models').then((m) => (this.models = m));
-    this.storageService.findAll().then((data) => (this.storages = data));
-    this.loading = false;
-  }
 
   @Input() cellphone: Cellphone = {
     id: 0,
@@ -64,16 +46,6 @@ export class CreateForm implements OnInit {
       this.cellphoneService.create(this.cellphone);
       form.resetForm();
     }
-  }
-
-  switch() {
-    if (!this.input) {
-      this.input = true;
-    }
-  }
-
-  addNewSecondary(value: string, url: string) {
-    return this.secondaryService.create({ name: value }, url);
   }
 
   deleteSecondary(value: number, url: string) {

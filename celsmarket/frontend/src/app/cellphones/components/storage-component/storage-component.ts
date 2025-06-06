@@ -2,6 +2,7 @@ import { CommonModule } from '@angular/common';
 import { Component, signal } from '@angular/core';
 import { StorageService } from '../../services/storage-service';
 import { Storage } from '../../models/storage';
+import { Secondary } from '../../models/secondary-entity';
 
 @Component({
   selector: 'app-storage-component',
@@ -10,7 +11,7 @@ import { Storage } from '../../models/storage';
   templateUrl: './storage-component.html',
 })
 export class StorageComponent {
-  storages = signal<Storage[]>([]);
+  storages = signal<Secondary[]>([]);
 
   constructor(private service: StorageService) {}
 
@@ -33,7 +34,13 @@ export class StorageComponent {
         number: newStorageNumber,
         unit: newStorageUnit,
       });
-      this.storages.update((storages) => [...storages, created]);
+
+      const transformed: Secondary = {
+        id: created.id,
+        name: `${created.number} ${created.unit}`,
+      };
+
+      this.storages.update((storages) => [...storages, transformed]);
     } catch (err) {
       console.error('Error creando almacenamiento:', err);
     }
