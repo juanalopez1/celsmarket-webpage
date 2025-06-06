@@ -1,5 +1,5 @@
 import { CommonModule } from '@angular/common';
-import { Component, inject, Input, OnInit } from '@angular/core';
+import { Component, inject, Input, OnInit, Output } from '@angular/core';
 import { FormsModule, NgForm } from '@angular/forms';
 import { Cellphone } from '../../models/cellphone';
 import { SecondaryEntityService } from '../../services/seconday-entity-service';
@@ -16,7 +16,6 @@ import { SelectSecondaryComponent } from "../select-secondary-component/select-s
 export class CreateForm {
   private secondaryService = inject(SecondaryEntityService);
   private cellphoneService = inject(CellphoneService);
-
 
   @Input() cellphone: Cellphone = {
     id: 0,
@@ -37,6 +36,7 @@ export class CreateForm {
     if (form.valid) {
       if (this.cellphone.id > 0) {
         this.cellphoneService.update(this.cellphone);
+        console.log("UPDATEADO " + JSON.stringify(this.cellphone))
         return;
       }
       this.cellphoneService.create(this.cellphone);
@@ -47,4 +47,5 @@ export class CreateForm {
   deleteSecondary(value: number, url: string) {
     return this.secondaryService.remove(value, url);
   }
+  
 }

@@ -4,14 +4,14 @@
   >
     @for (cell of this.cellphones(); track $index) {
     <div class="indicator">
-      <span class="indicator-item indicator-center badge badge-warning">
+      <span class="indicator-item indicator-center badge badge-soft badge-warning">
         {{ cell.condition.name }}
       </span>
       <div class="bg-base-300">
         <div class="card bg-base-100 w-96 shadow-sm">
           <figure>
             <img
-              src="https://img.daisyui.com/images/stock/photo-1606107557195-0e29a4b5b4aa.webp"
+              src="https://www.apple.com/euro/iphone/home/b/screens_alt/images/meta/iphone__kqge21l9n26q_og.png"
               alt="{{ cell.model.name }}"
             />
           </figure>
@@ -19,7 +19,7 @@
             <h2 class="card-title">{{ cell.model.name }}</h2>
             <p>${{ cell.price }}</p>
             <div class="card-actions justify-end">
-              <button class="btn btn-primary">Ver más</button>
+              <button class="btn btn-primary" [routerLink]="['/inventory', cell.id]">Ver más</button>
             </div>
           </div>
         </div>

@@ -1,6 +1,7 @@
 import { CommonModule } from '@angular/common';
 import { Component, inject, OnInit } from '@angular/core';
 import { UserService } from '../../../auth/services/user-service';
+import { LogService } from '../../../auth/services/log-service';
 
 @Component({
   selector: 'app-notice-component',
@@ -9,27 +10,16 @@ import { UserService } from '../../../auth/services/user-service';
 })
 export class NoticeComponent implements OnInit {
   allowed: boolean = false;
-  ngOnInit(): void {
-    this.isAllowed();
-  }
-  private userService = inject(UserService);
+  private logService = inject(LogService);
 
+  async ngOnInit() {
+    this.allowed = await this.logService.isAdmin();
+  }
   public message: string = 'ENVIOS A TODO URUGUAY!';
 
   changeMessage(newMessage: string) {
     this.message = newMessage;
     const modal = document.getElementById('my_modal_1') as HTMLDialogElement;
     modal.close();
-  }
-
-  async isAllowed() {
-    const username = localStorage.getItem('username');
-    if(username === null){
-      return;
-    }
-    const user = await this.userService.getByEmail(username!);
-    if (user.data.role === 'admin') {
-      this.allowed = true;
-    }
   }
 }

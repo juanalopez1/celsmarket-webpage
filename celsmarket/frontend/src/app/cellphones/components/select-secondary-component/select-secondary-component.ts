@@ -6,8 +6,8 @@ import { StorageService } from '../../services/storage-service';
 @Component({
   selector: 'app-select-secondary-component',
   templateUrl: './select-secondary-component.html',
-  styles: ``,
   imports: [],
+  standalone: true
 })
 export class SelectSecondaryComponent implements OnInit {
   @Input() componentFor: string = '';

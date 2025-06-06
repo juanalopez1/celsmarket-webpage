@@ -25,6 +25,11 @@ export class CellphoneService {
     return response.data as Cellphone;
   }
 
+  async findByIdAvailable(id : number): Promise<Cellphone> {
+    const response = await axios.get(this.url + "/availables/" + id);
+    return response.data as Cellphone;
+  }
+
   async create(cellphone: Cellphone): Promise<Cellphone> {
     const { id, ...cellphoneWithoutId } = cellphone;
     const response = await axios.post(this.url, cellphoneWithoutId);

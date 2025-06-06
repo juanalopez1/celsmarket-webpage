@@ -16,4 +16,11 @@ export class DetailsComponent implements OnInit {
   async ngOnInit(): Promise<void> {
     this.thisSale = await this.saleService.getById(this.id);
   }
+
+  showModal() {
+    const modal = document.getElementById(
+      'my_modal_details'
+    ) as HTMLDialogElement;
+    modal.showModal();
+  }
 }

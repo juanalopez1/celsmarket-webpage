@@ -2,10 +2,11 @@ import { Component, signal } from '@angular/core';
 import { SaleService } from '../../services/sale-service';
 import { Sale } from '../../models/sale';
 import { DetailsComponent } from "../details-component/details-component";
+import { RouterModule } from '@angular/router';
 
 @Component({
   selector: 'app-sales-history-component',
-  imports: [DetailsComponent],
+  imports: [DetailsComponent, RouterModule],
   templateUrl: './sales-history-component.html',
   styles: ``,
 })

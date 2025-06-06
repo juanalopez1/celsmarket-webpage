@@ -1,0 +1,38 @@
+import { Component, inject } from '@angular/core';
+import { Cellphone } from '../../../cellphones/models/cellphone';
+import { CellphoneService } from '../../../cellphones/services/cellphone-service';
+import { ActivatedRoute } from '@angular/router';
+import { CommonModule } from '@angular/common';
+import { WppButtonComponent } from "../wpp-button-component/wpp-button-component";
+
+@Component({
+  selector: 'app-view-details-component',
+  imports: [CommonModule, WppButtonComponent],
+  templateUrl: './view-details-component.html',
+  standalone: true,
+})
+export class ViewDetailsComponent {
+  loading: boolean = true;
+  constructor(private route: ActivatedRoute) {}
+  cellphone: Cellphone = new Cellphone();
+
+  async ngOnInit() {
+    const id = this.route.snapshot.paramMap.get('id');
+    console.log('ID recibido:', id);
+    await this.loadCellphone(parseInt(id!));
+    console.log('el id ' + parseInt(id!));
+    console.log('TENGO EL CELU? ' + JSON.stringify(this.cellphone));
+    this.loading = false;
+  }
+
+  private cellphoneService = inject(CellphoneService);
+
+  async loadCellphone(id: number) {
+    try {
+      this.cellphone = await this.cellphoneService.findByIdAvailable(id);
+      console.log('TENGO EL CELU? 2 ' + JSON.stringify(this.cellphone));
+    } catch (err) {
+      console.error('Error al obtener el celular:', err);
+    }
+  }
+}

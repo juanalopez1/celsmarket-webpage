@@ -1,5 +1,5 @@
 <!-- Open the modal using ID.showModal() method -->
-<button class="btn btn-square btn-ghost" onclick="my_modal_details.showModal()">
+<button class="btn btn-square btn-ghost" (click)="my_modal_details.showModal()">
   <svg
     xmlns="http://www.w3.org/2000/svg"
     width="24"
@@ -18,13 +18,14 @@
     <circle cx="12" cy="12" r="3" />
   </svg>
 </button>
-<dialog id="my_modal_details" class="modal">
+<dialog #my_modal_details class="modal">
   <div class="modal-box">
-    <h3 class="text-lg font-bold">{{this.thisSale?.cellphone?.model}}</h3>
+    <h3 class="text-lg font-bold">{{this.thisSale?.cellphone?.model?.name}}</h3>
+    <p class="py-4">A nombre de: {{this.thisSale?.client?.name}}</p>
     <p class="py-4">{{this.thisSale?.address}}</p>
     <div class="modal-action">
       <form method="dialog">
-        <button class="btn">Cerrar</button>
+        <button class="btn btn-soft btn-info">Cerrar</button>
       </form>
     </div>
   </div>

@@ -1,0 +1,36 @@
+<div class="blur-2xl"><!-- banner -->></div>
+
+<!-- Muestra el loader mientras loading es true -->
+<span *ngIf="loading" class="loading loading-dots loading-xl"></span>
+
+<!-- Muestra el contenido cuando loading es false -->
+<div *ngIf="!loading">
+  <!-- fotos -->
+  <app-wpp-button-component></app-wpp-button-component>
+  <div
+    class="collapse collapse-arrow bg-base-100 border border-base-300 rounded-box"
+  >
+    <div
+      class="collapse collapse-arrow border border-base-300 bg-base-100 rounded-box"
+    >
+      <input type="checkbox" id="toggle-accordion" class="peer" />
+      <label
+        for="toggle-accordion"
+        class="collapse-title font-bold text-lg cursor-pointer"
+      >
+        Especificaciones
+      </label>
+      <div class="collapse-content text-sm">
+        <strong>Condición de la batería:</strong> {{ cellphone.batteryCondition
+        }}%<br />
+        <strong>Marca:</strong> {{ cellphone.brand.name }}<br />
+        <strong>Color:</strong> {{ cellphone.color.name }}<br />
+        <strong>Condición del celular:</strong> {{ cellphone.condition.name
+        }}<br />
+        <strong>Modelo:</strong> {{ cellphone.model.name }}<br />
+        <strong>Almacenamiento:</strong> {{ cellphone.storage.number }} {{
+        cellphone.storage.unit }}
+      </div>
+    </div>
+  </div>
+</div>

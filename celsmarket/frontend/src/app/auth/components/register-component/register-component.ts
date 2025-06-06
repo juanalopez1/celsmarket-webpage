@@ -7,6 +7,7 @@ import { User } from '../../models/user';
 @Component({
   selector: 'app-register-component',
   imports: [FormsModule, CommonModule],
+  standalone: true,
   templateUrl: './register-component.html',
 })
 export class RegisterComponent {

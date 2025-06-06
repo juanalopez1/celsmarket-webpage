@@ -1,16 +1,17 @@
-import { Component, signal } from '@angular/core';
+import { Component, inject, signal } from '@angular/core';
 import { Cellphone } from '../../../cellphones/models/cellphone';
 import { CellphoneService } from '../../../cellphones/services/cellphone-service';
+import { RouterModule } from '@angular/router';
+import { LogService } from '../../../auth/services/log-service';
 
 @Component({
   selector: 'app-public-inventory-component',
-  imports: [],
+  imports: [RouterModule],
+  standalone: true,
   templateUrl: './public-inventory-component.html',
-  styles: ``
 })
 export class PublicInventoryComponent {
   cellphones = signal<Cellphone[]>([]);
-
 
   constructor(private service: CellphoneService) {}
 
@@ -20,7 +21,7 @@ export class PublicInventoryComponent {
 
   async loadCellphones() {
     try {
-      const result = await this.service.findAll();
+      const result = await this.service.findAvailables();
       this.cellphones.set(result);
     } catch (err) {
       console.error('Error cargando los productos:', err);

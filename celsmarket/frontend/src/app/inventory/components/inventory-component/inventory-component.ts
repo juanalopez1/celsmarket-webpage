@@ -1,14 +1,23 @@
 import { CommonModule } from '@angular/common';
-import { Component, signal, Signal } from '@angular/core';
+import {
+  Component,
+  ElementRef,
+  signal,
+  Signal,
+  ViewChild,
+} from '@angular/core';
 import { Cellphone } from '../../../cellphones/models/cellphone';
 import { CellphoneService } from '../../../cellphones/services/cellphone-service';
+import { CreateForm } from '../../../cellphones/components/create-form/create-form';
 
 @Component({
   selector: 'app-inventory-component',
-  imports: [CommonModule],
+  imports: [CommonModule, CreateForm],
+  standalone: true,
   templateUrl: './inventory-component.html',
 })
 export class inventoryComponent {
+  @ViewChild('my_modal_update') modalRef!: ElementRef<HTMLDialogElement>;
   cellphones = signal<Cellphone[]>([]);
 
   cellphoneselected: Cellphone = new Cellphone();
@@ -39,4 +48,7 @@ export class inventoryComponent {
     this.cellphoneselected = { ...cellphoneRow };
   }
 
+  openModal() {
+    this.modalRef.nativeElement.showModal();
+  }
 }

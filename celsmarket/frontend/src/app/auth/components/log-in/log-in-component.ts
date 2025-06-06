@@ -3,10 +3,12 @@ import { LogService } from '../../services/log-service';
 import { FormsModule, NgForm } from '@angular/forms';
 import { CommonModule } from '@angular/common';
 import { User } from '../../models/user';
+import { RouterLink } from '@angular/router';
 
 @Component({
   selector: 'app-log-in',
   imports: [FormsModule, CommonModule],
+  standalone: true,
   templateUrl: './log-in-component.html',
 })
 export class LogInComponent {

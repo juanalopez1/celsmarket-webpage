@@ -13,7 +13,6 @@ export class SecondaryEntityService {
   private url: string = 'http://localhost:8080';
 
   async findAll(entity : string): Promise<Secondary[]> {
-    console.log((await axios.get(this.url + "/" + entity)).data );
     const response = await axios.get(this.url + "/" + entity);
     return response.data as Secondary[];
   }
