@@ -1,0 +1,30 @@
+<div class="container m-auto pt-10">
+  <div
+    class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6"
+  >
+    @for (cell of this.cellphones(); track $index) {
+    <div class="indicator">
+      <span class="indicator-item indicator-center badge badge-warning">
+        {{ cell.condition.name }}
+      </span>
+      <div class="bg-base-300">
+        <div class="card bg-base-100 w-96 shadow-sm">
+          <figure>
+            <img
+              src="https://img.daisyui.com/images/stock/photo-1606107557195-0e29a4b5b4aa.webp"
+              alt="{{ cell.model.name }}"
+            />
+          </figure>
+          <div class="card-body">
+            <h2 class="card-title">{{ cell.model.name }}</h2>
+            <p>${{ cell.price }}</p>
+            <div class="card-actions justify-end">
+              <button class="btn btn-primary">Ver más</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    }
+  </div>
+</div>

@@ -12,7 +12,7 @@ import { AdminMenuComponent } from '../admin-menu-component/admin-menu-component
   templateUrl: './nav-component.html',
 })
 export class NavComponent {
-  allowed: boolean = false;
+  /*allowed: boolean = false;
   private userService = inject(UserService);
 
   ngOnInit(): void {
@@ -27,5 +27,5 @@ export class NavComponent {
     if (user.data.role === 'admin') {
       this.allowed = true;
     }
-  }
+  }*/
 }

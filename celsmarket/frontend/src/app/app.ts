@@ -5,10 +5,11 @@ import { LogInComponent } from "./auth/components/log-in/log-in-component";
 import { RegisterComponent } from "./auth/components/register-component/register-component";
 import { NavComponent } from "./nav/components/nav-component/nav-component";
 import { SalesHistoryComponent } from "./sales/components/sales-history-component/sales-history-component";
+import { PublicInventoryComponent } from "./inventory/components/public-inventory-component/public-inventory-component";
 
 @Component({
   selector: 'app-root',
-  imports: [/*RouterOutlet,*/ CreateForm, NavComponent, SalesHistoryComponent],
+  imports: [/*RouterOutlet,*/ CreateForm, NavComponent, SalesHistoryComponent, PublicInventoryComponent],
   templateUrl: './app.html',
   styleUrl: './app.css',
 })
