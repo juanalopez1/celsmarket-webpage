@@ -34,13 +34,14 @@ export class LogService {
 
   async register(user: User): Promise<User> {
     const response = await axios.post(this.url + '/users/register', user);
+    this.router.navigate(['/login']);
     return response.data;
   }
 
   async logOut() {
     localStorage.removeItem('token');
     localStorage.removeItem('username');
-    this.router.navigate(['/inventory']);
+    this.router.navigate(['/login']);
   }
 
   async isAdmin(): Promise<boolean> {
@@ -72,7 +73,6 @@ export class LogService {
   }
 
   isLoggedIn(): boolean {
-    if (typeof window === 'undefined') return false;
     const token = this.getToken();
     if (!token || this.isTokenExpired(token)) {
       this.logOut();

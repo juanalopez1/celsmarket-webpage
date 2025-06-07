@@ -20,8 +20,6 @@ export class ViewDetailsComponent {
     const id = this.route.snapshot.paramMap.get('id');
     console.log('ID recibido:', id);
     await this.loadCellphone(parseInt(id!));
-    console.log('el id ' + parseInt(id!));
-    console.log('TENGO EL CELU? ' + JSON.stringify(this.cellphone));
     this.loading = false;
   }
 
@@ -30,7 +28,6 @@ export class ViewDetailsComponent {
   async loadCellphone(id: number) {
     try {
       this.cellphone = await this.cellphoneService.findByIdAvailable(id);
-      console.log('TENGO EL CELU? 2 ' + JSON.stringify(this.cellphone));
     } catch (err) {
       console.error('Error al obtener el celular:', err);
     }

@@ -5,21 +5,13 @@ import { ViewDetailsComponent } from './inventory/components/view-details-compon
 import { PublicInventoryComponent } from './inventory/components/public-inventory-component/public-inventory-component';
 import { RegisterComponent } from './auth/components/register-component/register-component';
 import { SalesHistoryComponent } from './sales/components/sales-history-component/sales-history-component';
+import { PageComponent } from './hero-page/components/page-component/page-component';
 
 export const routes: Routes = [
-  /*{
-    path: '',
-    redirectTo: 'inventory',
-    pathMatch: 'full',
-  },
   {
     path: 'inventory',
     component: PublicInventoryComponent,
   },
-  {
-    path: 'inventory/:id',
-    component: ViewDetailsComponent,
-  },*/
   {
     path: 'login',
     component: LogInComponent,
@@ -29,8 +21,20 @@ export const routes: Routes = [
     component: RegisterComponent,
   },
   {
+    path: '',
+    redirectTo: 'inventory',
+    pathMatch: 'full',
+  },
+  {
+    path: 'inventory/:id',
+    component: ViewDetailsComponent,
+  },
+  {
+    path: 'hero',
+    component: PageComponent,
+  },
+  /*{
     path: 'sales',
     component: SalesHistoryComponent,
-  },
+  },*/
 ];
-

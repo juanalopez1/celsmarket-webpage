@@ -1,3 +1,6 @@
+<div class="flex items-end justify-end p-4 bg-gray-100">
+  <a [routerLink]="['/login']">Iniciar sesión</a>
+</div>
 <div class="flex items-center justify-center bg-gray-100">
   <form (ngSubmit)="registerNew(registerForm)" #registerForm="ngForm">
     <h1 class="text-4xl font-bold">Crear cuenta</h1>
@@ -9,9 +12,15 @@
         type="text"
         class="input"
         name="name"
+        #name="ngModel"
         [(ngModel)]="user.name"
         required
       />
+      <div *ngIf="name.dirty || name.touched" class="text-red-600">
+        <div *ngIf="name.errors!['required']">
+          Por favor ingresa tu nombre completo
+        </div>
+      </div>
     </fieldset>
 
     <fieldset class="fieldset">
@@ -21,19 +30,33 @@
         class="input"
         name="email"
         [(ngModel)]="user.email"
+        #email="ngModel"
         required
       />
+      <div *ngIf="email.dirty || email.touched" class="text-red-600">
+        <div *ngIf="email.errors!['required']">
+          El correo electrónico es necesario!
+        </div>
+      </div>
     </fieldset>
 
     <fieldset class="fieldset">
-      <legend class="fieldset-legend">Contrasena</legend>
+      <legend class="fieldset-legend">Contraseña</legend>
       <input
         type="password"
         class="input"
         name="password"
         [(ngModel)]="user.password"
+        #password="ngModel"
+        minlength="8"
         required
       />
+      <div *ngIf="password.dirty || password.touched" class="text-red-600">
+        <div *ngIf="password.errors!['required']">Constraseña necesaria</div>
+        <div *ngIf="password.errors!['minlength']">
+          La contraseña debe de tener al menos 8 caracteres
+        </div>
+      </div>
     </fieldset>
 
     <button class="btn btn-soft btn-primary">Registrarme</button>

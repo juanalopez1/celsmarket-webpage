@@ -1,3 +1,6 @@
+<div class="flex items-end justify-end p-4 bg-gray-100">
+  <a [routerLink]="['/register']">Registrarme</a>
+</div>
 <div class="flex items-center justify-center bg-gray-100">
   <form (ngSubmit)="logIn(logInForm)" #logInForm="ngForm">
     <h1 class="text-4xl font-bold">Inicia sesión</h1>
@@ -9,9 +12,15 @@
         type="text"
         class="input"
         name="email"
+        #email="ngModel"
         [(ngModel)]="user.email"
         required
       />
+      <div *ngIf="email.dirty || email.touched" class="text-red-600">
+        <div *ngIf="email.errors!['required']">
+          El correo electrónico es necesario!
+        </div>
+      </div>
     </fieldset>
 
     <fieldset>
@@ -21,8 +30,14 @@
         class="input"
         name="password"
         [(ngModel)]="user.password"
+        #password="ngModel"
         required
+        minlength="8"
       />
+      <div *ngIf="password.dirty || password.touched" class="text-red-600">
+        <div *ngIf="password.errors!['required']">Constraseña necesaria</div>
+        <div *ngIf="password.errors!['minlength']">Debe de tener al menos 8 caracteres</div>
+      </div>
     </fieldset>
 
     <button class="btn btn-soft btn-primary">Ingresar</button>

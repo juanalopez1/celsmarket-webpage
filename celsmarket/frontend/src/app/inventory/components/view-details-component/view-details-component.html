@@ -1,10 +1,12 @@
 <div class="blur-2xl"><!-- banner -->></div>
 
 <!-- Muestra el loader mientras loading es true -->
-<span *ngIf="loading" class="loading loading-dots loading-xl"></span>
+<div *ngIf="this.loading" class="flex justify-center">
+  <span class="loading loading-dots loading-xl"></span>
+</div>
 
 <!-- Muestra el contenido cuando loading es false -->
-<div *ngIf="!loading">
+<div *ngIf="!this.loading">
   <!-- fotos -->
   <app-wpp-button-component></app-wpp-button-component>
   <div

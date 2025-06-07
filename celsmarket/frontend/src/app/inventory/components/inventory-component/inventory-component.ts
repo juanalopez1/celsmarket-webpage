@@ -12,7 +12,7 @@ import { CreateForm } from '../../../cellphones/components/create-form/create-fo
 
 @Component({
   selector: 'app-inventory-component',
-  imports: [CommonModule, CreateForm],
+  imports: [CommonModule],
   standalone: true,
   templateUrl: './inventory-component.html',
 })

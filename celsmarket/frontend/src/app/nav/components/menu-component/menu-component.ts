@@ -8,15 +8,11 @@ import { LogService } from '../../../auth/services/log-service';
   imports: [RouterModule],
   templateUrl: './menu-component.html',
 })
-export class MenuComponent implements OnInit {
+export class MenuComponent {
   
   public logService = inject(LogService);
   showLogOut : boolean = false;
   telefono: string = "59891070450";
-
-  ngOnInit() {
-    this.showLogOut = this.logService.isLoggedIn();
-  }
 
   async openWhatsApp() {
     const message = 'Hola, me gustaría obtener más información.';

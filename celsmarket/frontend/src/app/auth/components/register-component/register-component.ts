@@ -3,10 +3,11 @@ import { Component, inject, Input } from '@angular/core';
 import { FormsModule, NgForm } from '@angular/forms';
 import { LogService } from '../../services/log-service';
 import { User } from '../../models/user';
+import { RouterModule } from '@angular/router';
 
 @Component({
   selector: 'app-register-component',
-  imports: [FormsModule, CommonModule],
+  imports: [FormsModule, CommonModule, RouterModule],
   standalone: true,
   templateUrl: './register-component.html',
 })
