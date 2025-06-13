@@ -1,116 +1,120 @@
-<form (ngSubmit)="onSubmit(cellphoneForm)" #cellphoneForm="ngForm">
-  <legend class="fieldset-legend text-l font-semibold">Marca</legend>
-  <div class="flex items-center justify-center p-2">
-    <div class="flex-1 max-w-md">
-      <app-select-secondary-component
-        [componentFor]="'Marca'"
-      ></app-select-secondary-component>
-    </div>
-    <app-add-secondary-component [url]="'brands'"></app-add-secondary-component>
-  </div>
-  <app-select-secondary-component
-    [componentFor]="'Modelo'"
-  ></app-select-secondary-component>
-  <app-add-secondary-component [url]="'models'"></app-add-secondary-component>
-  <app-select-secondary-component
-    [componentFor]="'Color'"
-  ></app-select-secondary-component>
-  <app-add-secondary-component [url]="'colors'"></app-add-secondary-component>
-  <app-select-secondary-component
-    [componentFor]="'Condición'"
-  ></app-select-secondary-component>
-  <app-add-secondary-component
-    [url]="'conditions'"
-  ></app-add-secondary-component>
-  <app-select-secondary-component
-    [componentFor]="'Almacenamiento'"
-  ></app-select-secondary-component>
-  <app-add-secondary-component [url]="'storages'"></app-add-secondary-component>
-
-  <div>
-    <legend class="fieldset-legend text-l font-semibold">Precio</legend>
-    <input
-      [(ngModel)]="cellphone.price"
-      name="price"
-      class="input input-info"
-      required
-    />
-  </div>
-
-  <div>
-    <legend class="fieldset-legend text-l font-semibold">Stock</legend>
-    <input
-      [(ngModel)]="cellphone.stock"
-      name="stock"
-      class="input input-info"
-      required
-      min="0"
-    />
-  </div>
-
-  <div>
-    <legend class="fieldset-legend text-l font-semibold">
-      Condición de la bateria
-    </legend>
-    <input
-      [(ngModel)]="cellphone.batteryCondition"
-      name="batteryCondition"
-      required
-      min="30"
-      max="100"
-      class="input input-info"
-    />
-  </div>
-
-  <div>
-    <legend class="fieldset-legend text-l font-semibold">Description</legend>
-    <textarea
-      class="textarea textarea-success"
-      [(ngModel)]="cellphone.description"
-    ></textarea>
-  </div>
-
-  <div class="flex items-center justify-center gap-4 p-2">
-    <legend class="fieldset-legend text-l font-semibold">
-      Mostrar disponible automaticamente
-    </legend>
-    <label class="toggle text-base-content">
-      <input type="checkbox" [(ngModel)]="cellphone.shown" name="shown" />
-      <svg
-        aria-label="enabled"
-        xmlns="http://www.w3.org/2000/svg"
-        viewBox="0 0 24 24"
-      >
-        <g
-          stroke-linejoin="round"
-          stroke-linecap="round"
-          stroke-width="4"
-          fill="none"
-          stroke="currentColor"
-        >
-          <path d="M20 6 9 17l-5-5"></path>
-        </g>
-      </svg>
-      <svg
-        aria-label="disabled"
-        xmlns="http://www.w3.org/2000/svg"
-        viewBox="0 0 24 24"
-        fill="none"
-        stroke="currentColor"
-        stroke-width="4"
-        stroke-linecap="round"
-        stroke-linejoin="round"
-      >
-        <path d="M18 6 6 18" />
-        <path d="m6 6 12 12" />
-      </svg>
-    </label>
-  </div>
-
-  <button
-    type="submit"
-    class="btn btn-soft btn-info"
+<div class="flex justify-center items-center min-h-screen bg-base-200 p-4">
+  <form
+    (ngSubmit)="onSubmit(cellphoneForm)"
+    #cellphoneForm="ngForm"
+    class="w-full max-w-2xl bg-white p-6 rounded shadow flex flex-col gap-4"
   >
-    Guardar
-  </button>
-</form>
+    <div class="flex items-center gap-4">
+      <div class="flex-1">
+        <legend class="text-lg font-semibold">Marca</legend>
+        <app-select-secondary-component
+          [componentFor]="'Marca'"
+        ></app-select-secondary-component>
+      </div>
+      <app-add-secondary-component
+        [url]="'brands'"
+      ></app-add-secondary-component>
+    </div>
+
+    <div class="flex items-center gap-4">
+      <div class="flex-1">
+        <legend class="text-lg font-semibold">Modelo</legend>
+        <app-select-secondary-component
+          [componentFor]="'Modelo'"
+        ></app-select-secondary-component>
+      </div>
+      <app-add-secondary-component
+        [url]="'models'"
+      ></app-add-secondary-component>
+    </div>
+
+    <div class="flex items-center gap-4">
+      <div class="flex-1">
+        <legend class="text-lg font-semibold">Color</legend>
+        <app-select-secondary-component
+          [componentFor]="'Color'"
+        ></app-select-secondary-component>
+      </div>
+      <app-add-secondary-component
+        [url]="'colors'"
+      ></app-add-secondary-component>
+    </div>
+
+    <div class="flex items-center gap-4">
+      <div class="flex-1">
+        <legend class="text-lg font-semibold">Condición del celular</legend>
+        <app-select-secondary-component
+          [componentFor]="'Condición'"
+        ></app-select-secondary-component>
+      </div>
+      <app-add-secondary-component
+        [url]="'conditions'"
+      ></app-add-secondary-component>
+    </div>
+
+    <div class="flex items-center gap-4">
+      <div class="flex-1">
+        <legend class="text-lg font-semibold">Almacenamiento</legend>
+        <app-select-secondary-component
+          [componentFor]="'Almacenamiento'"
+        ></app-select-secondary-component>
+      </div>
+      <app-add-secondary-component
+        [url]="'storages'"
+      ></app-add-secondary-component>
+    </div>
+
+    <div>
+      <legend class="text-lg font-semibold">Precio</legend>
+      <input
+        [(ngModel)]="cellphone.price"
+        name="price"
+        class="input input-info w-full"
+        required
+      />
+    </div>
+
+    <div>
+      <legend class="text-lg font-semibold">Stock</legend>
+      <input
+        [(ngModel)]="cellphone.stock"
+        name="price"
+        class="input input-info w-full"
+        required
+      />
+    </div>
+
+    <div>
+      <legend class="text-lg font-semibold">Condición de la bateria</legend>
+      <input
+        [(ngModel)]="cellphone.batteryCondition"
+        name="price"
+        class="input input-info w-full"
+        required
+      />
+    </div>
+
+    <div>
+      <legend class="text-lg font-semibold">Descripción</legend>
+      <textarea
+        [(ngModel)]="cellphone.description"
+        name="description"
+        class="textarea textarea-success w-full"
+
+      ></textarea>
+    </div>
+
+    <div class="flex items-center gap-4">
+      <legend class="text-lg font-semibold">
+        Mostrar disponible automáticamente
+      </legend>
+      <label class="toggle">
+        <input type="checkbox" [(ngModel)]="cellphone.shown" name="shown" />
+      </label>
+    </div>
+
+    <div class="flex justify-end">
+      <button type="submit" class="btn btn-info btn-sm" [routerLink]="['/inventory']" routerLinkActive="router-link-active">Guardar</button>
+    </div>
+  </form>
+</div>

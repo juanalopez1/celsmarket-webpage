@@ -4,10 +4,11 @@ import { CellphoneService } from '../../../cellphones/services/cellphone-service
 import { ActivatedRoute } from '@angular/router';
 import { CommonModule } from '@angular/common';
 import { WppButtonComponent } from "../wpp-button-component/wpp-button-component";
+import { NavComponent } from "../../../nav/components/nav-component/nav-component";
 
 @Component({
   selector: 'app-view-details-component',
-  imports: [CommonModule, WppButtonComponent],
+  imports: [CommonModule, WppButtonComponent, NavComponent],
   templateUrl: './view-details-component.html',
   standalone: true,
 })

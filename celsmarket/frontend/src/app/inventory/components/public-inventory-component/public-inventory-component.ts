@@ -3,10 +3,11 @@ import { Cellphone } from '../../../cellphones/models/cellphone';
 import { CellphoneService } from '../../../cellphones/services/cellphone-service';
 import { RouterModule } from '@angular/router';
 import { LogService } from '../../../auth/services/log-service';
+import { NavComponent } from "../../../nav/components/nav-component/nav-component";
 
 @Component({
   selector: 'app-public-inventory-component',
-  imports: [RouterModule],
+  imports: [RouterModule, NavComponent],
   standalone: true,
   templateUrl: './public-inventory-component.html',
 })

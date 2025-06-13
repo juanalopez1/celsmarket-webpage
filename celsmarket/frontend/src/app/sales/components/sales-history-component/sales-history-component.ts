@@ -3,10 +3,11 @@ import { SaleService } from '../../services/sale-service';
 import { Sale } from '../../models/sale';
 import { DetailsComponent } from "../details-component/details-component";
 import { RouterModule } from '@angular/router';
+import { NavComponent } from "../../../nav/components/nav-component/nav-component";
 
 @Component({
   selector: 'app-sales-history-component',
-  imports: [DetailsComponent, RouterModule],
+  imports: [DetailsComponent, RouterModule, NavComponent],
   templateUrl: './sales-history-component.html',
   styles: ``,
 })

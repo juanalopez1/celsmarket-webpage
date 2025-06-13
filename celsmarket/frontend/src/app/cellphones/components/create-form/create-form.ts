@@ -6,10 +6,12 @@ import { SecondaryEntityService } from '../../services/seconday-entity-service';
 import { CellphoneService } from '../../services/cellphone-service';
 import { AddSecondaryComponent } from "../add-secondary-component/add-secondary-component";
 import { SelectSecondaryComponent } from "../select-secondary-component/select-secondary-component";
+import { NavComponent } from "../../../nav/components/nav-component/nav-component";
+import { RouterModule } from '@angular/router';
 
 @Component({
   selector: 'app-create-form',
-  imports: [CommonModule, FormsModule, AddSecondaryComponent, SelectSecondaryComponent],
+  imports: [CommonModule, FormsModule, AddSecondaryComponent, SelectSecondaryComponent, RouterModule],
   standalone: true,
   templateUrl: './create-form.html',
 })
@@ -39,6 +41,7 @@ export class CreateForm {
         console.log("UPDATEADO " + JSON.stringify(this.cellphone))
         return;
       }
+      console.log('QUE PASO ' + form.valid)
       this.cellphoneService.create(this.cellphone);
       form.resetForm();
     }

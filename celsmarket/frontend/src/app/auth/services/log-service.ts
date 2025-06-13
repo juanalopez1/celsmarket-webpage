@@ -22,7 +22,7 @@ export class LogService {
       localStorage.setItem('username', JSON.stringify(response.data.username));
 
       // Opcional: navegar a otra vista
-      this.router.navigate(['/inventory']);
+      this.router.navigate(['/availables']);
       return response.data;
     } catch (e) {
       if (axios.isAxiosError(e) && e.status === 404) {
@@ -41,19 +41,25 @@ export class LogService {
   async logOut() {
     localStorage.removeItem('token');
     localStorage.removeItem('username');
+    localStorage.clear();
     this.router.navigate(['/login']);
   }
 
   async isAdmin(): Promise<boolean> {
-    if (typeof window === 'undefined') return false;
+    if (typeof window === 'undefined') {
+      console.warn('No hay acceso al window (SSR?)');
+      return false;
+    }
 
     const username = localStorage.getItem('username');
     if (!username) return false;
 
     try {
-      const user = await this.userService.getByEmail(username);
-      return user?.data?.role === 'admin';
-    } catch {
+      const email = username.replace(/"/g, '');
+      const user = await this.userService.getByEmail(email);
+      return user.role === 'admin';
+    } catch (error) {
+      console.error('Error al obtener el usuario:', error);
       return false;
     }
   }

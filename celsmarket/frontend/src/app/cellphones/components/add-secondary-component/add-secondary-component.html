@@ -1,4 +1,4 @@
-<button class="btn btn-ghost" onclick="my_modal_add.showModal()">
+<button class="btn btn-ghost" (click)="openModal()">
   <svg
     xmlns="http://www.w3.org/2000/svg"
     width="24"
@@ -15,13 +15,15 @@
     <path d="M12 5v14" />
   </svg>
 </button>
-<dialog id="my_modal_add" class="modal">
+
+<dialog #my_modal_add class="modal">
   <div class="modal-box">
     <form method="dialog">
       <button class="btn btn-sm btn-circle btn-ghost absolute right-2 top-2">
         ✕
       </button>
     </form>
+    <h2 class="text-lg font-bold">{{this.url}}</h2>
     <input
       name="name"
       #newInput
@@ -30,10 +32,11 @@
       class="input input-info"
     />
     <button
-      class="btn btn-soft btn-info"
+      class="btn btn-soft btn-info m-1"
       (click)="addNewSecondary(newInput.value, this.url)"
     >
       Guardar
     </button>
+    <label class="modal-backdrop" for="my_modal_add"></label>
   </div>
 </dialog>

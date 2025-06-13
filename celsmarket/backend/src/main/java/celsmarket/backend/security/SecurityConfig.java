@@ -44,42 +44,7 @@ public class SecurityConfig {
     @Bean
     public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
         return http.authorizeHttpRequests(authz -> authz
-                .requestMatchers(HttpMethod.GET,
-                        "/brands/**",
-                        "/models/**",
-                        "/storages/**",
-                        "/colors/**",
-                        "/conditions/**")
-                .permitAll()
-                .requestMatchers(HttpMethod.POST,
-                        "/brands/**",
-                        "/models/**",
-                        "/storages/**",
-                        "/colors/**",
-                        "/conditions/**")
-                .hasRole("admin")
-                .requestMatchers(HttpMethod.DELETE,
-                        "/brands/**",
-                        "/models/**",
-                        "/storages/**",
-                        "/conditions/**",
-                        "/colors/**")
-                .permitAll()
-                .requestMatchers(HttpMethod.POST, "/users/register").permitAll()
-                .requestMatchers(HttpMethod.GET, "/inventory/availables/**").permitAll()
-                .requestMatchers("/inventory/**").permitAll()
-                //.requestMatchers(HttpMethod.POST, "/inventory").hasRole("admin")
-                //.requestMatchers(HttpMethod.DELETE, "/inventory").hasRole("admin")
-                //.requestMatchers(HttpMethod.PUT, "/inventory").hasRole("admin")
-                //.requestMatchers(HttpMethod.GET, "/inventory").hasRole("admin")
-                .requestMatchers(HttpMethod.GET, "/users").hasRole("admin")
-                .requestMatchers("/sales/**").permitAll()
-                .requestMatchers("/cities/**").hasRole("admin")
-                .requestMatchers("/currencies/**").hasRole("admin")
-                .requestMatchers("/sales/{id}").authenticated()
-                .requestMatchers("/users/{id}").authenticated()
-                .requestMatchers("/carts/**").permitAll()
-                .anyRequest().authenticated())
+                .anyRequest().permitAll())
                 .addFilter(new JwtValidationFilter(authConfig.getAuthenticationManager())) // todo el filtro y
 
                 .addFilter(new JwtAuthenticationFilter(authConfig.getAuthenticationManager())) // todo el filtro y

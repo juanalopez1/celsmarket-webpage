@@ -8,9 +8,16 @@ import { SecondaryEntityService } from '../../services/seconday-entity-service';
 })
 export class AddSecondaryComponent {
   private secondaryService = inject(SecondaryEntityService);
-  @Input() url : string = '';
+  @Input() url: string = '';
 
+  @ViewChild('my_modal_add') modalRef!: ElementRef<HTMLDialogElement>;
   addNewSecondary(value: string, url: string) {
-    return this.secondaryService.create({ name: value }, url);
+    this.secondaryService.create({ name: value }, url);
+    this.modalRef.nativeElement.close();
+    return;
+  }
+
+  openModal() {
+    this.modalRef.nativeElement.showModal();
   }
 }

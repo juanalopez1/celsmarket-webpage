@@ -46,7 +46,9 @@
             d="M21 12.43a1.93 1.93 0 0 0 0-3.36L8.83 2.2a1.64 1.64 0 0 0-1.63 0L3 4.57a1.93 1.93 0 0 0 0 3.36l12.18 6.86a1.636 1.636 0 0 0 1.63 0z"
           />
         </svg>
-        <a [routerLink]="['/inventory']">Inventorio</a>
+        <a [routerLink]="['/inventory']" routerLinkActive="router-link-active"
+          >Inventario</a
+        >
       </div>
     </li>
     <li>
@@ -67,7 +69,9 @@
           <path d="M3 6h18" />
           <path d="M16 10a4 4 0 0 1-8 0" />
         </svg>
-        <a [routerLink]="['/sales']">Ventas</a>
+        <a [routerLink]="['/sales']" routerLinkActive="router-link-active"
+          >Ventas</a
+        >
       </div>
     </li>
     <li>
@@ -88,7 +92,9 @@
           <circle cx="10" cy="8" r="5" />
           <path d="m16 19 2 2 4-4" />
         </svg>
-        <a [routerLink]="['/users']">Usuarios</a>
+        <a [routerLink]="['/users']" routerLinkActive="router-link-active"
+          >Usuarios</a
+        >
       </div>
     </li>
     <li>
@@ -109,7 +115,9 @@
           <path d="M21 12H9" />
           <path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4" />
         </svg>
-        <a>Cerrar sesión</a>
+        <a [routerLink]="['/availables']" routerLinkActive="router-link-active"
+          >Cerrar sesión</a
+        >
       </div>
     </li>
   </ul>

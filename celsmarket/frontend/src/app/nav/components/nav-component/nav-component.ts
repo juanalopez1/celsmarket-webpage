@@ -7,6 +7,8 @@ import { UserService } from '../../../auth/services/user-service';
 import { AdminMenuComponent } from '../admin-menu-component/admin-menu-component';
 import { LogService } from '../../../auth/services/log-service';
 import { CommonModule } from '@angular/common';
+import { RouterModule } from '@angular/router';
+import { MenuDecitionComponent } from "../menu-decition-component/menu-decition-component";
 
 @Component({
   selector: 'app-nav-component',
@@ -16,15 +18,12 @@ import { CommonModule } from '@angular/common';
     MenuComponent,
     CartComponent,
     AdminMenuComponent,
-    CommonModule
-  ],
+    CommonModule,
+    RouterModule,
+    MenuDecitionComponent
+],
   templateUrl: './nav-component.html',
 })
 export class NavComponent {
-  allowed: boolean = false;
-  private logService = inject(LogService);
-
-  async ngOnInit() {
-    this.allowed = await this.logService.isAdmin();
-  }
+  
 }

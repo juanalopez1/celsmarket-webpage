@@ -1,43 +1,88 @@
+<app-nav-component></app-nav-component>
+<div class="flex justify-center items-center p-4">
+  <button
+    class="btn btn-soft btn-primary btn-lg"
+    [routerLink]="['/create']"
+    routerLinkActive="router-link-active"
+  >
+    Agregar
+  </button>
+</div>
+
 <div class="container m-auto pt-10">
   <div
     class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6"
   >
     @for (cell of this.cellphones(); track $index) {
     <div class="indicator">
-      <span class="indicator-item indicator-center badge badge-warning">
-        {{ cell.condition.name }}
+      <!-- Indicadores de estado -->
+      <span
+        *ngIf="cell.sold"
+        class="indicator-item indicator-center badge badge-error"
+      >
+        Vendido
       </span>
+      <span
+        *ngIf="cell.shown"
+        class="indicator-item indicator-center badge badge-success"
+      >
+        En página
+      </span>
+      <span
+        *ngIf="!cell.shown && !cell.sold"
+        class="indicator-item indicator-center badge badge-warning"
+      >
+        Oculto
+      </span>
+
+      <!-- Card -->
       <div class="bg-base-300">
-        <div class="card bg-base-100 w-96 shadow-sm">
-          <figure>
+        <div
+          class="card w-96 bg-base-100 shadow-sm relative group overflow-hidden"
+        >
+          <figure class="transition-all duration-300">
             <img
               src="https://www.apple.com/euro/iphone/home/b/screens_alt/images/meta/iphone__kqge21l9n26q_og.png"
               alt="{{ cell.model.name }}"
+              class="w-full transition duration-300 group-hover:blur-sm"
             />
           </figure>
-          <div class="card-body">
+
+          <div
+            class="absolute inset-0 flex justify-center items-center opacity-0 group-hover:opacity-100 transition-opacity duration-300 z-10"
+          >
+            <button
+              class="btn m-0.5"
+              [ngClass]="cell.sold ? 'btn-error' : 'btn-error btn-soft'"
+              (click)="markAsSold(cell)"
+            >
+              {{ cell.sold ? 'Vendido' : 'Marcar como vendido' }}
+            </button>
+            <button
+              class="btn btn-primary m-0.5"
+              (click)="onEditClick(cell)"
+            >
+              Editar
+            </button>
+          </div>
+
+          <div class="card-body z-0 group-hover:blur-sm">
             <h2 class="card-title">{{ cell.model.name }}</h2>
             <p>${{ cell.price }}</p>
+
             <div class="card-actions justify-end">
-              <div>
-                <button class="btn btn-primary" (click)="openModal()">
-                  Editar
-                </button>
-                <dialog #my_modal_update class="modal">
-                  <div class="modal-box">
-                    <h3 class="text-lg font-bold">
-                      Celular {{cell.id}} - {{cell.model.name}}
-                    </h3>
-                    <div class="modal-action">
-                      <!--<form method="dialog">
-                        <app-create-form
-                          [cellphone]="cellphoneselected"
-                        ></app-create-form>
-                      </form>-->
-                    </div>
+              <dialog #my_modal_update class="modal">
+                <div class="modal-box bg-base-200">
+                  <h3 class="text-lg font-bold">
+                    Celular {{cell.id}} - {{cell.model.name}}
+                  </h3>
+                  <div class="modal-action">
+                    <app-create-form
+                      [cellphone]="cellphoneSelected"
+                    ></app-create-form>
                   </div>
-                </dialog>
-              </div>
+                </div>
+              </dialog>
             </div>
           </div>
         </div>

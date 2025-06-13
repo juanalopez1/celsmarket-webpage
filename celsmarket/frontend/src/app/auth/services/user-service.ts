@@ -9,13 +9,13 @@ export class UserService {
 
   async getByEmail(email: string) {
     try {
-        const response = await axios.get(this.url + '/' + email);
-        return response.data;
-    } catch(e) {
-        if (axios.isAxiosError(e) && e.status === 404){
-            console.log(e.message);
-            return;
-        }
+      const response = await axios.get(this.url + '/' + email);
+      return response.data;
+    } catch (e) {
+      if (axios.isAxiosError(e) && e.status === 404) {
+        console.log(e.message);
+        return;
+      }
     }
   }
 }

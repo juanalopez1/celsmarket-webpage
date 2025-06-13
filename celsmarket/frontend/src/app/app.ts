@@ -19,7 +19,8 @@ import { ViewDetailsComponent } from './inventory/components/view-details-compon
     PublicInventoryComponent,
     inventoryComponent,
     ViewDetailsComponent,
-  ],
+    LogInComponent
+],
   templateUrl: './app.html',
   styleUrl: './app.css',
 })

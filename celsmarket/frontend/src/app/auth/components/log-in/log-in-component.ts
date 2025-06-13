@@ -4,10 +4,11 @@ import { FormsModule, NgForm } from '@angular/forms';
 import { CommonModule } from '@angular/common';
 import { User } from '../../models/user';
 import { RouterLink, RouterModule } from '@angular/router';
+import { AlertComponent } from "../../../alerts/alert-component/alert-component";
 
 @Component({
   selector: 'app-log-in',
-  imports: [FormsModule, CommonModule, RouterModule],
+  imports: [FormsModule, CommonModule, RouterModule, AlertComponent],
   standalone: true,
   templateUrl: './log-in-component.html',
 })
@@ -24,6 +25,9 @@ export class LogInComponent {
     if (form.valid) {
       this.logService.logIn(this.user);
       form.reset();
+    }
+    else {
+      
     }
     return;
   }

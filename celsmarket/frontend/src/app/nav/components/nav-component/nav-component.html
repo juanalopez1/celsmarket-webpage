@@ -1,12 +1,8 @@
 <div>
   <app-notice-component></app-notice-component>
-  <div class="flex justify-between items-center gap-4 p-4">
-    @if(this.allowed){
-    <app-admin-menu-component></app-admin-menu-component>
-    } @else {
-    <app-menu-component></app-menu-component>
-    }
-    <img src="assets/Logo.png" alt="CelsMarket" />
+  <div class="flex justify-between items-center gap-4 pr-4 pl-4 pt-4">
+    <app-menu-decition-component></app-menu-decition-component>
+    <img role="link" [routerLink]="['/inventory']" src="logo.jpeg" alt="CelsMarket" class="w-full max-w-[5rem] h-auto" />
     <app-cart-component></app-cart-component>
   </div>
   <app-search-component></app-search-component>
