@@ -4,11 +4,12 @@ import { FormsModule, NgForm } from '@angular/forms';
 import { CommonModule } from '@angular/common';
 import { User } from '../../models/user';
 import { RouterLink, RouterModule } from '@angular/router';
-import { AlertComponent } from "../../../alerts/alert-component/alert-component";
+import { AlertComponent } from "../../../reusable/alert-component/alert-component";
+import { ModalLogIn } from "../modal-log-in/modal-log-in";
 
 @Component({
   selector: 'app-log-in',
-  imports: [FormsModule, CommonModule, RouterModule, AlertComponent],
+  imports: [FormsModule, CommonModule, RouterModule, AlertComponent, ModalLogIn],
   standalone: true,
   templateUrl: './log-in-component.html',
 })
@@ -27,7 +28,7 @@ export class LogInComponent {
       form.reset();
     }
     else {
-      
+
     }
     return;
   }

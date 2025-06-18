@@ -1,23 +1,40 @@
-import { Component, inject, OnInit } from '@angular/core';
+import {
+  Component,
+  ElementRef,
+  inject,
+  OnInit,
+  ViewChild,
+} from '@angular/core';
 import { RouterModule } from '@angular/router';
 import { LogService } from '../../../auth/services/log-service';
+import { ModalLogIn } from '../../../auth/components/modal-log-in/modal-log-in';
 
 @Component({
   selector: 'app-menu-component',
   standalone: true,
-  imports: [RouterModule],
+  imports: [RouterModule, ModalLogIn],
   templateUrl: './menu-component.html',
 })
 export class MenuComponent {
-  
   public logService = inject(LogService);
-  showLogOut : boolean = false;
-  telefono: string = "59891070450";
+  showLogOut: boolean = false;
+  telefono: string = '59891070450';
 
   async openWhatsApp() {
     const message = 'Hola, me gustaría obtener más información.';
-    const url = `https://wa.me/${this.telefono}?text=${encodeURIComponent(message)}`;
+    const url = `https://wa.me/${this.telefono}?text=${encodeURIComponent(
+      message
+    )}`;
     window.open(url, '_blank');
   }
 
+  @ViewChild('loginModal') loginModalComponent!: ModalLogIn; 
+
+  open() {
+    this.loginModalComponent.openModal(); 
+  }
+
+  close() {
+    this.loginModalComponent.closeModal(); 
+  }
 }

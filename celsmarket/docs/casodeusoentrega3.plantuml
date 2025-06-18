@@ -1,0 +1,110 @@
+'coloque inicio de sesion aparte porque en la letra dice el "usuario tiene acceso al sistema", y para enfocarme mejor solo en paso de registro
+@startuml
+actor Administrador
+
+rectangle {
+    Administrador --> (Iniciar sesión en el sistema)
+    Administrador --> (Registrar nuevo dispositivo)
+
+    (Registrar nuevo dispositivo) ..> (Completar formulario de dispositivo): <<include>>
+    (Registrar nuevo dispositivo) ..> (Adjuntar fotos) : <<include>>
+    (Registrar nuevo dispositivo) ..> (Guardar dispositivo): <<include>>
+    (Guardar dispositivo) ..> (Confirmar registro de dispositivo): <<include>>
+
+    (Guardar dispositivo) <.. (Solicitar corrección de campos): <<extend>>
+
+}
+
+@enduml
+
+
+@startuml
+actor Administrador
+
+rectangle {
+    Administrador --> (Registrar reparación de dispositivo)
+    (Registrar reparación de dispositivo) ..> (Acceder al inventario): <<include>>
+    (Registrar reparación de dispositivo) ..> (Seleccionar dispositivo reparado): <<include>>
+    (Registrar reparación de dispositivo) ..> (Marcar como reparado): <<include>>
+    (Registrar reparación de dispositivo) ..> (Adjuntar fotos) : <<include>>
+    (Registrar reparación de dispositivo) ..> (Guardar cambios): <<include>>
+    (Guardar cambios) ..> (Confirmar actualización de estado): <<include>>
+
+    (Guardar cambios) <.. (Guardar como borrador): <<extend>>
+}
+@enduml
+
+' 3 corregido
+@startuml
+actor Administrador
+
+rectangle {
+    Administrador --> (Publicar dispositivo)
+    (Publicar dispositivo) ..> (Acceder a publicaciones): <<include>>
+    (Publicar dispositivo) ..> (Seleccionar "Crear nueva"): <<include>>
+    (Publicar dispositivo) ..> (Escoger dispositivo del inventario): <<include>>
+    (Publicar dispositivo) ..> (Completar ficha de publicación): <<include>>
+    (Publicar dispositivo) ..> (Adjuntar fotos): <<include>>
+    (Publicar dispositivo) ..> (Confirmar publicación): <<include>>
+
+    (Confirmar publicación) <.. (Solicitar corrección de errores): <<extend>>
+    (Confirmar publicación) <.. (Guardar como borrador): <<extend>>
+}
+@enduml
+
+'es el 4 pero corregido
+@startuml
+actor Administrador
+
+rectangle {
+    Administrador --> (Responder consulta de cliente)
+    (Responder consulta de cliente) ..> (Revisar bandeja de mensajes): <<include>>
+    (Responder consulta de cliente) ..> (Abrir consulta): <<include>>
+    (Responder consulta de cliente) ..> (Leer y evaluar pregunta): <<include>>
+    (Responder consulta de cliente) ..> (Responder por canal correspondiente): <<inlcude>>
+
+    (Responder por canal correspondiente) <.. (Marcar conversación como inactiva): <<extend>>
+    (Responder por canal correspondiente) <.. (Utilizar canal alternativo): <<extend>>
+}
+@enduml
+
+' es el 5 pero corregido
+@startuml
+actor Administrador
+rectangle {
+    Administrador --> (Registrar venta del dispositivo)
+    (Registrar venta del dispositivo) ..> (Seleccionar dispositivo vendido): <<include>>
+    (Registrar venta del dispositivo) ..> (Ingresar datos del cliente): <<include>>
+    (Registrar venta del dispositivo) ..> (Registrar forma de pago y monto): <<include>>
+    (Registrar venta del dispositivo) ..> (Confirmar operación): <<include>>
+    (Confirmar operación) ..> (Actualizar inventario y marcar como vendido): <<include>>
+
+    (Confirmar operación) <.. (Emitir constancia manual): <<extend>>
+}
+@enduml
+
+
+'este es el DIAGARMA GENERAL pero corregido
+@startuml
+left to right direction
+
+actor Administrador
+actor Cliente
+
+rectangle {
+    ' Casos de uso principales
+    Administrador --> (Registrar nuevo dispositivo)
+    Administrador --> (Marcar dispositivo como reparado)
+    Administrador --> (Publicar dispositivo en venta)
+    Administrador --> (Responder consulta de cliente)
+    Administrador --> (Registrar venta del dispositivo)
+
+    Cliente --> (Realizar consulta)
+}
+
+note as N1
+"Realizar consulta" es un caso de uso
+externo iniciado por el cliente fuera del sistema.
+end note
+
+@enduml

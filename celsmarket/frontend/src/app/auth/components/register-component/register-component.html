@@ -10,7 +10,7 @@
       <legend class="fieldset-legend">Nombre completo</legend>
       <input
         type="text"
-        class="input"
+        class="input w-full"
         name="name"
         #name="ngModel"
         [(ngModel)]="user.name"
@@ -27,7 +27,7 @@
       <legend class="fieldset-legend">Correo electronico</legend>
       <input
         type="text"
-        class="input"
+        class="input w-full"
         name="email"
         [(ngModel)]="user.email"
         #email="ngModel"
@@ -44,7 +44,7 @@
       <legend class="fieldset-legend">Contraseña</legend>
       <input
         type="password"
-        class="input"
+        class="input w-full"
         name="password"
         [(ngModel)]="user.password"
         #password="ngModel"
@@ -59,6 +59,6 @@
       </div>
     </fieldset>
 
-    <button class="btn btn-soft btn-primary">Registrarme</button>
+    <button class="btn btn-soft btn-info w-full">Registrarme</button>
   </form>
 </div>

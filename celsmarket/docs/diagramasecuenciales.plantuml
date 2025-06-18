@@ -1,0 +1,240 @@
+@startuml
+hide footbox
+actor Usuario
+participant Interfaz
+participant Sistema
+database "Base de Datos" as BD
+
+== Inicio de sesión ==
+Usuario -> Interfaz : iniciarSesión()
+activate Interfaz
+Interfaz -> Sistema : autenticarUsuario()
+activate Sistema
+Sistema -> BD : verificarCredenciales()
+activate BD
+BD --> Sistema : credencialesVálidas
+deactivate BD
+Sistema --> Interfaz : accesoConcedido()
+Interfaz --> Usuario : redireccionar()
+deactivate Sistema
+deactivate Interfaz
+deactivate Usuario
+
+== Registrar nuevo dispositivo ==
+Usuario -> Interfaz : accederA("Inventario > Registrar nuevo dispositivo")
+activate Interfaz
+Interfaz -> Sistema : mostrarFormulario()
+activate Sistema
+deactivate Sistema
+deactivate Interfaz
+deactivate Usuario
+
+Usuario -> Interfaz : completarFormulario(datosDispositivo)
+activate Interfaz
+Usuario -> Interfaz : adjuntarFotos(opcional)
+Usuario -> Interfaz : hacerClicEnGuardar()
+Interfaz -> Sistema : validarFormulario()
+activate Sistema
+
+alt Campos obligatorios incompletos (A1.1)
+    Sistema --> Interfaz : mostrarError("Completa todos los campos obligatorios")
+    Interfaz --> Usuario : notificarError()
+else Validación exitosa
+    Sistema -> BD : guardarDispositivo(datosCompletos)
+    activate BD
+    BD --> Sistema : confirmaciónGuardado
+    deactivate BD
+    Sistema --> Interfaz : mostrarMensaje("Dispositivo registrado exitosamente")
+    Interfaz --> Usuario : notificarExito()
+end
+deactivate Usuario
+
+== Excepción por falla técnica ==
+group Si ocurre error del sistema o de conexión (E1.1)
+    Sistema --> Interfaz : mostrarError("Falla de sistema o conexión. Intente más tarde")
+    Interfaz --> Usuario : notificarError()
+end
+@enduml
+
+@startuml
+hide footbox
+actor Usuario
+participant Interfaz
+participant Sistema
+database "Base de Datos" as BD
+
+== Inicio de sesión ==
+Usuario -> Interfaz : iniciarSesión()
+activate Interfaz
+Interfaz -> Sistema : autenticarUsuario()
+activate Sistema
+Sistema -> BD : verificarCredenciales()
+activate BD
+BD --> Sistema : credencialesVálidas
+deactivate BD
+Sistema --> Interfaz : accesoConcedido()
+Interfaz --> Usuario : redireccionar()
+deactivate Sistema
+deactivate Interfaz
+
+== Marcar dispositivo como reparado ==
+Usuario -> Interfaz : accederA("Inventario")
+activate Interfaz
+Usuario -> Interfaz : seleccionarDispositivoReparado()
+Usuario -> Interfaz : hacerClic("Actualizar estado / Marcar como reparado")
+Usuario -> Interfaz : adjuntarFotos(opcional)
+Usuario -> Interfaz : guardarCambios()
+Interfaz -> Sistema : actualizarEstado("Listo para la venta")
+activate Sistema
+
+alt Sistema responde correctamente
+    Sistema -> BD : actualizarRegistroDispositivo()
+    activate BD
+    BD --> Sistema : confirmaciónActualización
+    Sistema --> Interfaz : mostrarMensaje("Estado actualizado a 'Listo para la venta'")
+else Error del sistema o sin respuesta (E2.1)
+    Sistema -> BD : guardarComoBorrador()
+    Sistema --> Interfaz : mostrarMensaje("Guardado como borrador para edición futura")
+end
+Interfaz --> Usuario : mostrarMensaje("'Exito' o 'Error")
+deactivate Sistema
+deactivate Interfaz
+@enduml
+
+@startuml
+hide footbox
+actor Usuario
+participant Interfaz
+participant Sistema
+database "Base de Datos" as BD
+
+== Inicio de sesión ==
+Usuario -> Interfaz : iniciarSesión()
+activate Interfaz
+Interfaz -> Sistema : autenticarUsuario()
+activate Sistema
+Sistema -> BD : verificarCredenciales()
+activate BD
+BD --> Sistema : credencialesVálidas
+deactivate BD
+Sistema --> Interfaz : accesoConcedido()
+deactivate Sistema
+deactivate Interfaz
+
+== Crear nueva publicación ==
+Usuario -> Interfaz : irA("Publicaciones > Crear nueva")
+activate Interfaz
+Usuario -> Interfaz : seleccionarDispositivo()
+Usuario -> Interfaz : completarFicha(título, descripción, precio, estado, mediosDePago)
+Usuario -> Interfaz : adjuntarFotosAltaCalidad()
+Usuario -> Interfaz : hacerClicEnPublicar()
+Interfaz -> Sistema : validarDatosPublicación()
+activate Sistema
+
+alt Datos inválidos o faltantes (A3.1)
+    Sistema --> Interfaz : mostrarErroresValidación()
+else Datos correctos
+    Sistema -> BD : guardarPublicación()
+    activate BD
+    BD --> Sistema : confirmaciónPublicación
+    deactivate BD
+    Sistema --> Interfaz : mostrarMensaje("Publicación realizada con éxito")
+    Interfaz --> Usuario : notificarExito()
+end
+
+== Excepción: Falla del sistema (E3.1) ==
+group Si falla la publicación
+    Sistema --> BD : guardarComoBorrador()
+    Sistema --> Interfaz : mostrarMensaje("Falla en el sistema. Publicación guardada como borrador.")
+end
+Interfaz --> Usuario : notificarError()
+@enduml
+
+@startuml
+hide footbox
+actor Nazareno
+participant Interfaz
+participant Sistema
+participant "Canal Alternativo\n(WhatsApp, Email)" as CanalAlternativo
+
+== Revisión de mensajes ==
+Nazareno -> Interfaz : accederABandejaDeMensajes()
+activate Interfaz
+Interfaz -> Sistema : obtenerConsultas()
+activate Sistema
+Sistema --> Interfaz : mostrarConsultas()
+deactivate Sistema
+deactivate Interfaz
+
+== Responder consulta ==
+Nazareno -> Interfaz : abrirConsulta()
+activate Interfaz
+Interfaz -> Sistema : mostrarDetalleConsulta()
+activate Sistema
+deactivate Sistema
+Nazareno -> Interfaz : redactarRespuesta()
+Nazareno -> Interfaz : enviarRespuesta()
+Interfaz -> Sistema : procesarRespuesta()
+activate Sistema
+
+alt Sistema de mensajes operativo
+    Sistema --> Interfaz : mostrarMensaje("Respuesta enviada")
+else Sistema de mensajes no disponible (E3.1)
+    Sistema --> CanalAlternativo : reenviarMensaje()
+    activate CanalAlternativo
+    CanalAlternativo --> Sistema : confirmaciónEnvío
+    deactivate CanalAlternativo
+    Sistema --> Interfaz : notificar("Se usó canal alternativo")
+end
+
+== Alternativa A3.1 ==
+group Cliente no responde por un tiempo
+    Sistema --> Interfaz : marcarConversaciónComoInactiva()
+end
+Interfaz --> Nazareno : notificarEstadoConversacion()
+@enduml
+
+@startuml
+hide footbox
+actor Usuario
+participant Interfaz
+participant Sistema
+database "Base de Datos" as BD
+
+== Inicio ==
+Usuario -> Interfaz : accederAlSistema()
+activate Interfaz
+Interfaz -> Sistema : autenticarUsuario()
+activate Sistema
+Sistema -> BD : verificarCredenciales()
+activate BD
+BD --> Sistema : credencialesVálidas
+deactivate BD
+Sistema --> Interfaz : accesoConcedido()
+Interfaz --> Usuario : redireccionar()
+deactivate Sistema
+deactivate Interfaz
+
+== Registro de venta ==
+Usuario -> Interfaz : seleccionarDispositivoVendido()
+activate Interfaz
+Usuario -> Interfaz : ingresarDatosCliente(nombre, contacto, ciudad)
+Usuario -> Interfaz : registrarPagoYMonto()
+Usuario -> Interfaz : confirmarOperacion()
+Interfaz -> Sistema : procesarRegistroVenta()
+activate Sistema
+
+alt Sistema responde correctamente
+    Sistema -> BD : actualizarInventario(marcarComoVendido)
+    activate BD
+    BD --> Sistema : confirmaciónRegistro
+    deactivate BD
+    Sistema --> Interfaz : mostrarMensaje("Venta registrada con éxito")
+    Interfaz --> Usuario : mostrarMensaje("Venta registrada con éxito")
+else Fallo al procesar (E3.1)
+    Sistema --> Interfaz : mostrarMensaje("Fallo en el sistema. Emitir constancia manual")
+    Interfaz --> Usuario : mostrarMensaje("Fallo en el sistema.")
+end
+deactivate Sistema
+deactivate Interfaz
+@enduml

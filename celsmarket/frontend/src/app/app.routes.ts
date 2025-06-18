@@ -22,14 +22,14 @@ export const routes: Routes = [
     path: 'availables',
     component: PublicInventoryComponent,
   },
-  {
+  /*{
     path: 'login',
     component: LogInComponent,
   },
   {
     path: 'register',
     component: RegisterComponent,
-  },
+  },*/
   {
     path: 'availables/:id',
     component: ViewDetailsComponent,

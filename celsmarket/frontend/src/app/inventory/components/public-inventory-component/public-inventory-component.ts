@@ -4,10 +4,11 @@ import { CellphoneService } from '../../../cellphones/services/cellphone-service
 import { RouterModule } from '@angular/router';
 import { LogService } from '../../../auth/services/log-service';
 import { NavComponent } from "../../../nav/components/nav-component/nav-component";
+import { ModalLogIn } from "../../../auth/components/modal-log-in/modal-log-in";
 
 @Component({
   selector: 'app-public-inventory-component',
-  imports: [RouterModule, NavComponent],
+  imports: [RouterModule, NavComponent, ModalLogIn],
   standalone: true,
   templateUrl: './public-inventory-component.html',
 })

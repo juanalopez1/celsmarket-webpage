@@ -39,9 +39,9 @@
           <circle cx="12" cy="8" r="5" />
           <path d="M20 21a8 8 0 0 0-16 0" />
         </svg>
-        <a [routerLink]="['/register']" routerLinkActive="router-link-active"
-          >Ingresar | Registrarme</a
-        >
+
+        <!-- Este botón ahora usa Angular -->
+        <a role="button" (click)="open()">Ingresar | Registrarme</a>
       </div>
     </li>
     }
@@ -120,3 +120,5 @@
     }
   </ul>
 </div>
+
+<app-modal-log-in #loginModal></app-modal-log-in>

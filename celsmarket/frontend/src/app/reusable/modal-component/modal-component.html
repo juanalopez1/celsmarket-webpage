@@ -1,0 +1,17 @@
+<dialog #dialogRef class="modal">
+  <div class="modal-box w-11/12" [ngClass]="width">
+    <form method="dialog">
+      <button
+        class="btn btn-sm btn-circle btn-ghost absolute right-2 top-2"
+        (click)="close()"
+      >
+        ✕
+      </button>
+    </form>
+
+    <h3 class="font-bold text-lg mb-4">{{ title }}</h3>
+
+    <!-- Proyectar contenido -->
+    <ng-content></ng-content>
+  </div>
+</dialog>

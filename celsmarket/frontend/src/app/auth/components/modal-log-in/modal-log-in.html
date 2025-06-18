@@ -1,0 +1,59 @@
+<!-- Botón para abrir el modal -->
+
+<!-- Modal -->
+<dialog #dialog class="modal">
+  <div class="modal-box flex items-center justify-center bg-gray-100">
+    <button
+      class="btn btn-sm btn-circle btn-ghost absolute right-2 top-2"
+      (click)="closeModal()"
+    >
+      ✕
+    </button>
+
+    <form (ngSubmit)="logIn(logInForm)" #logInForm="ngForm">
+      <h1 class="text-4xl font-bold">Inicia sesión</h1>
+      <p>¡Bienvenido de vuelta!</p>
+
+      <!-- Campo email -->
+      <fieldset>
+        <legend class="fieldset-legend">Correo electrónico</legend>
+        <input
+          type="text"
+          class="input w-full"
+          name="email"
+          [(ngModel)]="user.email"
+          #email="ngModel"
+          required
+        />
+        <div *ngIf="email.dirty || email.touched" class="text-red-600">
+          <div *ngIf="email.errors?.['required']">
+            El correo electrónico es necesario!
+          </div>
+        </div>
+      </fieldset>
+
+      <!-- Campo contraseña -->
+      <fieldset>
+        <legend class="fieldset-legend">Contraseña</legend>
+        <input
+          type="password"
+          class="input w-full"
+          name="password"
+          [(ngModel)]="user.password"
+          #password="ngModel"
+          required
+          minlength="8"
+        />
+        <div *ngIf="password.dirty || password.touched" class="text-red-600">
+          <div *ngIf="password.errors?.['required']">Contraseña necesaria</div>
+          <div *ngIf="password.errors?.['minlength']">
+            Debe de tener al menos 8 caracteres
+          </div>
+        </div>
+      </fieldset>
+      <br />
+      <!-- Botón submit -->
+      <button class="btn btn-soft btn-info w-full">Ingresar</button>
+    </form>
+  </div>
+</dialog>
