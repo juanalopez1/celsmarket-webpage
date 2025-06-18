@@ -7,12 +7,12 @@ import {
 } from '@angular/core';
 import { RouterModule } from '@angular/router';
 import { LogService } from '../../../auth/services/log-service';
-import { ModalLogIn } from '../../../auth/components/modal-log-in/modal-log-in';
+import { ModalAuth } from '../../../auth/components/modal-auth/modal-auth';
 
 @Component({
   selector: 'app-menu-component',
   standalone: true,
-  imports: [RouterModule, ModalLogIn],
+  imports: [RouterModule, ModalAuth],
   templateUrl: './menu-component.html',
 })
 export class MenuComponent {
@@ -28,7 +28,7 @@ export class MenuComponent {
     window.open(url, '_blank');
   }
 
-  @ViewChild('loginModal') loginModalComponent!: ModalLogIn; 
+  @ViewChild('authModal') loginModalComponent!: ModalAuth; 
 
   open() {
     this.loginModalComponent.openModal(); 

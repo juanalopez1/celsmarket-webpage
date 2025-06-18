@@ -40,8 +40,8 @@
           <path d="M20 21a8 8 0 0 0-16 0" />
         </svg>
 
-        <!-- Este botón ahora usa Angular -->
-        <a role="button" (click)="open()">Ingresar | Registrarme</a>
+
+        <a role="button" (click)="authModal.openModal('login')">Ingresar | Registrarme</a>
       </div>
     </li>
     }
@@ -121,4 +121,4 @@
   </ul>
 </div>
 
-<app-modal-log-in #loginModal></app-modal-log-in>
+<app-modal-auth #authModal></app-modal-auth>
