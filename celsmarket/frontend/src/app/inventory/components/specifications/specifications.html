@@ -1,0 +1,44 @@
+<div
+  class="collapse collapse-arrow bg-base-100 border border-base-300 rounded-box"
+>
+  <div
+    class="collapse collapse-arrow border border-base-300 bg-base-100 rounded-box"
+  >
+    <input type="checkbox" id="toggle-accordion" class="peer" />
+    <label
+      for="toggle-accordion"
+      class="collapse-title font-bold text-lg cursor-pointer flex items-center gap-2"
+    >
+      <svg
+        xmlns="http://www.w3.org/2000/svg"
+        width="24"
+        height="24"
+        viewBox="0 0 24 24"
+        fill="none"
+        stroke="currentColor"
+        stroke-width="2"
+        stroke-linecap="round"
+        stroke-linejoin="round"
+        class="lucide lucide-list-collapse-icon lucide-list-collapse"
+      >
+        <path d="M10 12h11" />
+        <path d="M10 18h11" />
+        <path d="M10 6h11" />
+        <path d="m3 10 3-3-3-3" />
+        <path d="m3 20 3-3-3-3" />
+      </svg>
+      Especificaciones
+    </label>
+
+    <div class="collapse-content text-sm">
+      <strong>Condición de la batería:</strong> {{ cellphone.batteryCondition
+      }}%<br />
+      <strong>Marca:</strong> {{ cellphone.brand.name }}<br />
+      <strong>Color:</strong> {{ cellphone.color.name }}<br />
+      <strong>Condición del celular:</strong> {{ cellphone.condition.name }}<br />
+      <strong>Modelo:</strong> {{ cellphone.model.name }}<br />
+      <strong>Almacenamiento:</strong> {{ cellphone.storage.number }} {{
+      cellphone.storage.unit }}
+    </div>
+  </div>
+</div>
