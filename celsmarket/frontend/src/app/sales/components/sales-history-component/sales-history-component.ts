@@ -7,9 +7,10 @@ import { NavComponent } from "../../../nav/components/nav-component/nav-componen
 
 @Component({
   selector: 'app-sales-history-component',
-  imports: [DetailsComponent, RouterModule, NavComponent],
+  imports: [DetailsComponent, RouterModule],
   templateUrl: './sales-history-component.html',
   styles: ``,
+  standalone: true,
 })
 export class SalesHistoryComponent {
   sales = signal<Sale[]>([]);

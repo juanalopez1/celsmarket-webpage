@@ -1,18 +1,16 @@
 import { Component, inject, signal } from '@angular/core';
-import { Cellphone } from '../../../cellphones/models/cellphone';
-import { CellphoneService } from '../../../cellphones/services/cellphone-service';
 import { RouterModule } from '@angular/router';
-import { LogService } from '../../../auth/services/log-service';
-import { NavComponent } from "../../../nav/components/nav-component/nav-component";
 import { CommonModule } from '@angular/common';
+import { Cellphone } from '../../cellphones/models/cellphone';
+import { CellphoneService } from '../../cellphones/services/cellphone-service';
 
 @Component({
   selector: 'app-public-inventory-component',
-  imports: [RouterModule, NavComponent, CommonModule],
+  imports: [RouterModule, CommonModule, RouterModule],
   standalone: true,
-  templateUrl: './public-inventory-component.html',
+  templateUrl: './client-inventory.html',
 })
-export class PublicInventoryComponent {
+export class ClientInventory {
   cellphones = signal<Cellphone[]>([]);
 
   constructor(private service: CellphoneService) {}

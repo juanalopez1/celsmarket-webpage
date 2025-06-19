@@ -1,7 +1,7 @@
 import { Component, inject } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
-import { Cellphone } from '../../../cellphones/models/cellphone';
-import { CellphoneService } from '../../../cellphones/services/cellphone-service';
+import { Cellphone } from '../../cellphones/models/cellphone';
+import { CellphoneService } from '../../cellphones/services/cellphone-service';
 
 @Component({
   selector: 'app-specifications',

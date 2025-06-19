@@ -6,19 +6,19 @@ import {
   Signal,
   ViewChild,
 } from '@angular/core';
-import { Cellphone } from '../../../cellphones/models/cellphone';
-import { CellphoneService } from '../../../cellphones/services/cellphone-service';
-import { CreateForm } from '../../../cellphones/components/create-form/create-form';
 import { RouterModule } from '@angular/router';
-import { NavComponent } from '../../../nav/components/nav-component/nav-component';
+import { Cellphone } from '../../cellphones/models/cellphone';
+import { CellphoneService } from '../../cellphones/services/cellphone-service';
+import { CreateForm } from '../../cellphones/components/create-form/create-form';
+import { NavComponent } from '../../nav/components/nav-component/nav-component';
 
 @Component({
   selector: 'app-inventory-component',
-  imports: [CommonModule, RouterModule, CreateForm, NavComponent],
+  imports: [CommonModule, RouterModule, CreateForm],
   standalone: true,
-  templateUrl: './inventory-component.html',
+  templateUrl: './admin-inventory.html',
 })
-export class inventoryComponent {
+export class AdminInventory {
   cellphones = signal<Cellphone[]>([]);
 
   cellphoneSelected: Cellphone = new Cellphone();

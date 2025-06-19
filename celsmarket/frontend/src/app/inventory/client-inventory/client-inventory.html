@@ -1,0 +1,55 @@
+<div class="container m-auto pt-10">
+  <div
+    class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6"
+  >
+    @for (cell of this.cellphones(); track $index) {
+    <div class="group">
+      <div class="bg-base-300">
+        <div
+          class="card bg-base-100 w-96 shadow-sm group-hover:scale-105 transition-transform duration-300"
+        >
+          <div
+            *ngIf="cell.condition.name == 'semi-nuevo'"
+            class="badge badge-soft badge-warning text-lg"
+          >
+            {{cell.condition.name}}
+          </div>
+          <div
+            *ngIf="cell.condition.name == 'usado'"
+            class="badge badge-soft badge-accent text-lg"
+          >
+            {{cell.condition.name}}
+          </div>
+          <div
+            *ngIf="cell.condition.name == 'reparado'"
+            class="badge badge-soft badge-info text-lg"
+          >
+            {{cell.condition.name}}
+          </div>
+          <figure>
+            <img
+              src="https://www.apple.com/euro/iphone/home/b/screens_alt/images/meta/iphone__kqge21l9n26q_og.png"
+              alt="{{ cell.model.name }}"
+            />
+          </figure>
+          <div class="card-body items-center">
+            <h2 class="card-title">
+              {{ cell.model.name }} {{cell.storage.number}}
+              {{cell.storage.unit}}
+            </h2>
+            <p class="text-2xl font-bold">${{ cell.price }}</p>
+            <div class="card-actions justify-end">
+              <button
+                class="btn btn-primary btn-soft"
+                [routerLink]="['/inventory', cell.id]"
+              >
+                Ver más
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    }
+  </div>
+</div>

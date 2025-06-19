@@ -22,7 +22,7 @@ export class LogService {
       localStorage.setItem('username', JSON.stringify(response.data.username));
 
       // Opcional: navegar a otra vista
-      this.router.navigate(['/availables']);
+      this.router.navigate(['/inventory']);
       return response.data;
     } catch (e) {
       if (axios.isAxiosError(e) && e.status === 404) {

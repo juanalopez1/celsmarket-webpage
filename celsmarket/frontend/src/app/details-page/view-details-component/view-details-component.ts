@@ -1,21 +1,20 @@
 import { Component, inject } from '@angular/core';
-import { Cellphone } from '../../../cellphones/models/cellphone';
-import { CellphoneService } from '../../../cellphones/services/cellphone-service';
 import { ActivatedRoute, RouterModule } from '@angular/router';
 import { CommonModule } from '@angular/common';
 import { WppButtonComponent } from '../wpp-button-component/wpp-button-component';
-import { NavComponent } from '../../../nav/components/nav-component/nav-component';
 import { Specifications } from '../specifications/specifications';
-import { LoadingComponent } from '../../../reusable/loading-component/loading-component';
 import { Shipments } from '../shipments/shipments';
 import { Payments } from '../payments/payments';
+import { NavComponent } from '../../nav/components/nav-component/nav-component';
+import { LoadingComponent } from '../../reusable/loading-component/loading-component';
+import { Cellphone } from '../../cellphones/models/cellphone';
+import { CellphoneService } from '../../cellphones/services/cellphone-service';
 
 @Component({
   selector: 'app-view-details-component',
   imports: [
     CommonModule,
     WppButtonComponent,
-    NavComponent,
     Specifications,
     LoadingComponent,
     Shipments,
