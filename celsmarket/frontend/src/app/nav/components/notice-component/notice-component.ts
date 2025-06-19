@@ -15,7 +15,7 @@ export class NoticeComponent implements OnInit {
   async ngOnInit() {
     this.allowed = await this.logService.isAdmin();
   }
-  public message: string = 'ENVIOS A TODO URUGUAY!';
+  public message: string = 'ACEPTAMOS TU IPHONE COMO PARTE DE PAGO!';
 
   changeMessage(newMessage: string) {
     this.message = newMessage;
