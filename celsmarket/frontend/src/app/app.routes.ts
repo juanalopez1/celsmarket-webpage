@@ -19,7 +19,7 @@ export const routes: Routes = [
     ],
   },
 
-  { path: 'inventory', component: ClientInventory },
+  { path: 'inventory', component: AdminInventory },
   { path: 'inventory/:id', component: ViewDetailsComponent },
   { path: 'hero', component: PageComponent },
 ];

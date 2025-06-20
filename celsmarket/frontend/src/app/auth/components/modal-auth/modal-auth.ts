@@ -3,11 +3,14 @@ import { CommonModule } from '@angular/common';
 import { FormsModule, NgForm } from '@angular/forms';
 import { User } from '../../models/user';
 import { LogService } from '../../services/log-service';
+import { toast } from 'ngx-sonner';
+import { HlmToasterComponent } from '../../../../../libs/ui/ui-sonner-helm/src/lib/hlm-toaster.component';
+import axios from 'axios';
 
 @Component({
   selector: 'app-modal-auth',
   standalone: true,
-  imports: [CommonModule, FormsModule],
+  imports: [CommonModule, FormsModule, HlmToasterComponent],
   templateUrl: './modal-auth.html',
 })
 export class ModalAuth {

@@ -1,7 +1,7 @@
 <div class="flex justify-center items-center p-4">
   <button
     class="btn btn-soft btn-primary btn-lg"
-    [routerLink]="['/create']"
+    [routerLink]="['/admin/create']"
     routerLinkActive="router-link-active"
   >
     Agregar
@@ -13,76 +13,65 @@
     class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6"
   >
     @for (cell of this.cellphones(); track $index) {
-    <div class="indicator">
-      <!-- Indicadores de estado -->
-      <span
-        *ngIf="cell.sold"
-        class="indicator-item indicator-center badge badge-error"
-      >
-        Vendido
-      </span>
-      <span
-        *ngIf="cell.shown"
-        class="indicator-item indicator-center badge badge-success"
-      >
-        En página
-      </span>
-      <span
-        *ngIf="!cell.shown && !cell.sold"
-        class="indicator-item indicator-center badge badge-warning"
-      >
-        Oculto
-      </span>
 
-      <!-- Card -->
-      <div class="bg-base-300">
+    <div class="bg-base-300">
+      <div
+        class="card w-96 bg-base-100 shadow-sm relative group overflow-hidden"
+      >
+        <div *ngIf="cell.sold" class="badge badge-soft badge-error text-lg">
+          Vendido
+        </div>
+        <div *ngIf="cell.shown" class="badge badge-soft badge-success text-lg">
+          En página
+        </div>
         <div
-          class="card w-96 bg-base-100 shadow-sm relative group overflow-hidden"
+          *ngIf="!cell.sold && !cell.shown"
+          class="badge badge-soft badge-info text-lg"
         >
-          <figure class="transition-all duration-300">
-            <img
-              src="https://www.apple.com/euro/iphone/home/b/screens_alt/images/meta/iphone__kqge21l9n26q_og.png"
-              alt="{{ cell.model.name }}"
-              class="w-full transition duration-300 group-hover:blur-sm"
-            />
-          </figure>
+          Oculto
+        </div>
+        <figure class="transition-all duration-300">
+          <img
+            src="https://www.apple.com/euro/iphone/home/b/screens_alt/images/meta/iphone__kqge21l9n26q_og.png"
+            alt="{{ cell.model.name }}"
+            class="w-full transition duration-300 group-hover:blur-sm"
+          />
+        </figure>
 
-          <div
-            class="absolute inset-0 flex justify-center items-center opacity-0 group-hover:opacity-100 transition-opacity duration-300 z-10"
+        <div
+          class="absolute inset-0 flex justify-center items-center opacity-0 group-hover:opacity-100 transition-opacity duration-300 z-10"
+        >
+          <button
+            class="btn m-0.5"
+            [ngClass]="cell.sold ? 'hidden' : 'btn-error btn-soft'"
+            (click)="markAsSold(cell)"
           >
-            <button
-              class="btn m-0.5"
-              [ngClass]="cell.sold ? 'btn-error' : 'btn-error btn-soft'"
-              (click)="markAsSold(cell)"
-            >
-              {{ cell.sold ? 'Vendido' : 'Marcar como vendido' }}
-            </button>
-            <button
-              class="btn btn-primary m-0.5"
-              (click)="onEditClick(cell)"
-            >
-              Editar
-            </button>
-          </div>
+            {{ cell.sold ? 'Vendido' : 'Marcar como vendido' }}
+          </button>
+          <button class="btn btn-primary m-0.5" (click)="onEditClick(cell)">
+            Editar
+          </button>
+        </div>
 
-          <div class="card-body z-0 group-hover:blur-sm">
-            <h2 class="card-title">{{ cell.model.name }}</h2>
-            <p>${{ cell.price }}</p>
+        <div class="card-body items-center group-hover:blur-sm">
+          <h2 class="card-title">
+            {{ cell.model.name }} {{cell.storage.number}} {{cell.storage.unit}}
+          </h2>
+          <p class="text-2xl font-bold">${{ cell.price }}</p>
 
-            <div class="card-actions justify-end">
-              <dialog #my_modal_update class="modal">
-                <div class="modal-box bg-base-200">
-                  <h3 class="text-lg font-bold">
-                    Celular {{cell.id}} - {{cell.model.name}}
-                  </h3>
-                  <div class="modal-action">
-                    <app-create-form
-                      [cellphone]="cellphoneSelected"
-                    ></app-create-form>
-                  </div>
+          <div class="card-actions justify-end">
+            <dialog #my_modal_update class="modal">
+              <div class="modal-box bg-base-200">
+                <h3 class="text-lg font-bold">
+                  Celular {{cell.id}} - {{cell.model.name}}
+                </h3>
+                <div class="modal-action">
+                  <app-create-form
+                    [cellphone]="cellphoneSelected"
+                  ></app-create-form>
                 </div>
-              </dialog>
-            </div>
+              </div>
+            </dialog>
           </div>
         </div>
       </div>

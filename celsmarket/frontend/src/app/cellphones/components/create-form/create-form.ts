@@ -8,6 +8,7 @@ import { AddSecondaryComponent } from "../add-secondary-component/add-secondary-
 import { SelectSecondaryComponent } from "../select-secondary-component/select-secondary-component";
 import { NavComponent } from "../../../nav/components/nav-component/nav-component";
 import { RouterModule } from '@angular/router';
+import { toast } from 'ngx-sonner';
 
 @Component({
   selector: 'app-create-form',
@@ -44,6 +45,7 @@ export class CreateForm {
       console.log('QUE PASO ' + form.valid)
       this.cellphoneService.create(this.cellphone);
       form.resetForm();
+      toast.success('Celular agregado al inventario exitosamente!')
     }
   }
 

@@ -3,6 +3,7 @@ import axios from 'axios';
 import { User } from '../models/user';
 import { Router } from '@angular/router';
 import { UserService } from './user-service';
+import { toast } from 'ngx-sonner';
 
 @Injectable({
   providedIn: 'root',
@@ -17,16 +18,14 @@ export class LogService {
     try {
       const body = { email: user.email, password: user.password };
       const response = await axios.post(this.url + '/login', body);
-      if (typeof window !== 'undefined' && typeof localStorage !== 'undefined')
-        localStorage.setItem('token', response.data.token);
+      localStorage.setItem('token', response.data.token);
       localStorage.setItem('username', JSON.stringify(response.data.username));
-
-      // Opcional: navegar a otra vista
+      toast.success('Sesión iniciada correctamente!');
       this.router.navigate(['/inventory']);
       return response.data;
     } catch (e) {
-      if (axios.isAxiosError(e) && e.status === 404) {
-        // notificar no se pudo iniciar sesion
+      if (axios.isAxiosError(e) && (e.status === 404 || e.status === 401)) {
+        toast.error('No se pudo iniciar. Credenciales incorrectas.');
         return;
       }
     }
@@ -34,7 +33,10 @@ export class LogService {
 
   async register(user: User): Promise<User> {
     const response = await axios.post(this.url + '/users/register', user);
-    this.router.navigate(['/login']);
+
+    toast.success('Has sido registrado correctamente!', {
+      description: 'Ahora puedes iniciar sesión con tu email y contraseña.',
+    });
     return response.data;
   }
 
@@ -42,7 +44,7 @@ export class LogService {
     localStorage.removeItem('token');
     localStorage.removeItem('username');
     localStorage.clear();
-    this.router.navigate(['/login']);
+    this.router.navigate(['/inventory']);
   }
 
   async isAdmin(): Promise<boolean> {

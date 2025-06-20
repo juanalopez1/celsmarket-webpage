@@ -10,7 +10,6 @@ import { RouterModule } from '@angular/router';
 import { Cellphone } from '../../cellphones/models/cellphone';
 import { CellphoneService } from '../../cellphones/services/cellphone-service';
 import { CreateForm } from '../../cellphones/components/create-form/create-form';
-import { NavComponent } from '../../nav/components/nav-component/nav-component';
 
 @Component({
   selector: 'app-inventory-component',
@@ -57,7 +56,7 @@ export class AdminInventory {
 
   async markAsSold(cellphone: Cellphone) {
     this.cellphoneSelected = { ...cellphone };
-    console.log(JSON.stringify(this.cellphoneSelected + 'EEEEEEE')  );
+    console.log(JSON.stringify(cellphone + 'EEEEEEE')  );
 
     this.cellphoneSelected.sold = true;
 
